@@ -11,6 +11,25 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+
+@app.route('/feedback', methods=['GET','POST']) #landing page
+def feedback():
+    if request.method =="POST":
+        name = request.form['name']
+        phone = request.form['phone']
+        item = request.form['items']
+        url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/feedback"
+        data = {'Name':name,'PhoneNumber':phone,'Items':item,'Platform':"Web"}
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url, data=json.dumps(data), headers=headers)
+        data = r.json()
+        message="We have recieved your request"
+        return render_template("feedback.html", message=message)
+    return render_template("feedback.html")
+
+
+
+
 @app.route('/donate', methods=['GET','POST']) #landing page
 def donate():
     if request.method =="POST":
