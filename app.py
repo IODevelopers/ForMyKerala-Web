@@ -153,11 +153,10 @@ def dashvolunteer():
     donorweb = r.json()    
     return render_template("dashvolunteer.html",data=data,donorweb=donorweb,android=android,donors=donors)
 
-
-
-
-
-
+@app.route('/logout')
+def logout():
+	session.clear()								#Session is destroyed
+	return redirect(url_for('home'))
 
 
 @app.route('/dashboard', methods=['GET','POST']) 

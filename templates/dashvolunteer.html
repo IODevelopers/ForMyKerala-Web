@@ -255,6 +255,11 @@
             }, {}]
         }, {}, ["loader"]);
     </script>
+    <script>
+        function verify(TimeIndex,PhoneNumber){
+            alert(TimeIndex +" is verified by "+PhoneNumber)
+        }
+    </script>
     <title>For My Kerala</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -364,7 +369,7 @@ Logout
                               <td>{{data['Items'][i]['Address']}}</td>
                               <td>{{data['Items'][i]['District']}}</td>
                               <td>{{data['Items'][i]['Item']}}</td>
-                            
+                            <td> <button style ="background-color: #275dbf7d;" class="btn" onclick="verify({{data['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
                             </tr>
                           </tbody>
                           {% endfor %}
@@ -382,7 +387,10 @@ Logout
                                     <td>{%for j in android['Items'][i]['Items'].keys()%}
                                           {{ android['Items'][i]['Items'][j] }} &nbsp;
                                                 {% endfor %}</td>
-                            </tr>
+                            
+                                <td><button style ="background-color: #275dbf7d;" class="btn" onclick="verify({{android['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
+                                            </tr>
+
                           </tbody>
                           {% endfor %}
                           
@@ -402,10 +410,11 @@ Logout
                                   <th>District</th>
                                   <th>Item</th>
                                   <th>Count</th>
+                                  <th>Status</th>
                                 </tr>
                               </thead>
                               {%for i in range(0,donors['Count'])%}
-                              <tbody>
+                              
                                 <tr>
                                   <td>{{change_epoch(donors['Items'][i]['TimeIndex'])}}</td>
                                   <td>{{donors['Items'][i]['Name']}}</td>
@@ -422,11 +431,12 @@ Logout
                                        {% endfor %}
                                     </td>
                                  
-                                </tr>
-                              </tbody>
+                                
+                                <td><button style ="background-color: #275dbf7d;" class="btn" onclick="verify({{donors['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
+                            </tr>
                               {% endfor %}
                               {%for i in range(0,donorweb['Count'])%}
-                              <tbody>
+                              
                                 <tr>
                                   <td>{{change_epoch(donorweb['Items'][i]['TimeIndex'])}}</td>
                                   <td>{{donorweb['Items'][i]['Name']}}</td>
@@ -435,8 +445,9 @@ Logout
                                   <td>{{donorweb['Items'][i]['District']}}</td>
                                   <td>{{donorweb['Items'][i]['Item']}}</td>
                                   <td>{{donorweb['Items'][i]['Count']}}</td>
+                                  <td><button style ="background-color: #275dbf7d;" class="btn" onclick="verify({{donorweb['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
                                 </tr>
-                              </tbody>
+                              
                               {% endfor %}
             
                               
