@@ -24,6 +24,38 @@ def home():
     return render_template("index.html")
 
 
+@app.route('/accept/<string:timeindex>',methods=['GET','POST'])
+def accept(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('dashvolunteer'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/verification/request'
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    return redirect(url_for('dashvolunteer'))
+
+@app.route('/accept1/<string:timeindex>',methods=['GET','POST'])
+def accept1(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('dashvolunteer'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/verification/donations'
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    return redirect(url_for('dashvolunteer'))
+
+
+
+
+
+
 
 @app.route('/feedback', methods=['GET','POST']) #landing page
 def feedback():
@@ -103,6 +135,9 @@ def donate():
 
 
 
+
+
+
 @app.route('/requesthelp', methods=['GET','POST']) #landing page
 def requesthelp():
     if request.method =="POST":
@@ -150,11 +185,13 @@ def dashvolunteer():
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
     donors = r.json()
+    
     #data donors web
     url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
-    donorweb = r.json()    
+    donorweb = r.json()  
+    print(donorweb)
     return render_template("dashvolunteer.html",data=data,donorweb=donorweb,android=android,donors=donors)
 
 @app.route('/logout')
