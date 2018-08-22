@@ -30,9 +30,13 @@ def feedback():
     if request.method =="POST":
         name = request.form['name']
         phone = request.form['phone']
-        item = request.form['items']
+        familymembers = request.form['members']
+        situation = request.form['situation']
+        reccomendations = request.form['reccomendations']
+        items = request.form['items123']
         url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/feedback"
-        data = {'Name':name,'PhoneNumber':phone,'Items':item,'Platform':"Web"}
+        data = {'Name':name,'PhoneNumber':phone,'FamilyMembers':familymembers,'Situation':situation,'Reccomendations':reccomendations,'Items':items,'Platform':"Web"}
+        print(data)
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
         data = r.json()
