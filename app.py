@@ -202,6 +202,11 @@ def date_processor():
         return datetime.fromtimestamp(ts).strftime('%d/%m %I:%M %p')
     return dict(change_epoch=change_epoch)
 
+
+@app.route('/disclaimer')
+def disclaimer():
+    return render_template("disclaimer.html")
+
 @app.route('/test')
 def test():
     return render_template("test.html")
@@ -228,4 +233,4 @@ def volunteer():
 
 if __name__=='__main__':
     app.secret_key='secret123'
-    app.run(threaded=True,host="0.0.0.0",port=500)
+    app.run(threaded=True,host="0.0.0.0",port=80)
