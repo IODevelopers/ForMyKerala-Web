@@ -21,7 +21,7 @@ section, summary, time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
+	font-family: 'Roboto', sans-serif;
 	vertical-align: baseline;}
 
 article, aside, details, figcaption, figure,
@@ -30,8 +30,35 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
+	font-family: 'Roboto', sans-serif;
 }
+/*Navbar*/
+#mainNav {
+	border-color: rgba(34, 34, 34, 0.05);
+	background-color: #1f1f1f80;
+	-webkit-transition: all .35s;
+	-moz-transition: all .35s;
+	transition: all .35s;
+	height: auto;
+  }
+	.nav-link,.navbar-brand{
+	 	color:#ffffff !important;
+	}
+	.nav-link:hover{
+		color:#a5f5aa !important;
+	}
 
+
+/*
+Theme Color Used
+Primary Green : #16765aed
+Secondary Green (button text): #11a25a
+
+
+
+*/
+
+/*Nav end*/
 ol, ul {
 	list-style: none;
 }
@@ -159,11 +186,11 @@ input, select, textarea {
 		-ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 		text-decoration: none;
-		border-bottom: dotted 1px;
 	}
 
 		a:hover {
 			border-bottom-color: transparent !important;
+			text-decoration: none;
 		}
 
 	strong, b {
@@ -317,7 +344,7 @@ input, select, textarea {
 	}
 
 		a:hover {
-			color: #4696e5;
+			color: #118a2d;
 		}
 
 	strong, b {
@@ -1837,6 +1864,7 @@ input, select, textarea {
 	input[type="button"],
 	button,
 	.button {
+		text-decoration: none;
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
@@ -1856,6 +1884,8 @@ input, select, textarea {
 		text-align: center;
 		text-decoration: none;
 		white-space: nowrap;
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	  transition: all 0.3s ease 0s;
 	}
 
 		input[type="submit"].icon,
@@ -1942,7 +1972,7 @@ input, select, textarea {
 	button,
 	.button {
 		background-color: transparent;
-		color: #828282 !important;
+		color: #ffffff !important;
 		box-shadow: inset 0 0 0 2px #e6e6e6;
 	}
 
@@ -1951,7 +1981,10 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
+			text-decoration: none;
 			background-color: rgba(144, 144, 144, 0.075);
+			box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+		  transform: translateY(-3px);
 		}
 
 		input[type="submit"]:active,
@@ -2246,7 +2279,11 @@ input, select, textarea {
 	}
 
 /* Image */
-
+.img-fluid{
+	max-width: 100%;
+	width: 250px;
+	height: auto;
+}
 	.image {
 		border-radius: 6px;
 		border: 0;
@@ -2441,6 +2478,9 @@ input, select, textarea {
 
 /* Actions */
 
+.actions{
+	padding: 10px;
+}
 	ul.actions {
 		display: -moz-flex;
 		display: -webkit-flex;
@@ -2941,6 +2981,8 @@ input, select, textarea {
 				.wrapper.style1 button:hover,
 				.wrapper.style1 .button:hover {
 					background-color: rgba(255, 255, 255, 0.075);
+					box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+				  transform: translateY(-3px);
 				}
 
 				.wrapper.style1 input[type="submit"]:active,
@@ -3126,8 +3168,8 @@ input, select, textarea {
 			.wrapper.style2 button,
 			.wrapper.style2 .button {
 				background-color: transparent;
-				color: #828282 !important;
-				box-shadow: inset 0 0 0 2px #e6e6e6;
+				color: #16765aed !important;
+				box-shadow: inset 0 0 0 1px #dff5e3;
 			}
 
 				.wrapper.style2 input[type="submit"]:hover,
@@ -3136,6 +3178,8 @@ input, select, textarea {
 				.wrapper.style2 button:hover,
 				.wrapper.style2 .button:hover {
 					background-color: rgba(144, 144, 144, 0.075);
+					box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+				  transform: translateY(-3px);
 				}
 
 				.wrapper.style2 input[type="submit"]:active,
@@ -3350,6 +3394,8 @@ input, select, textarea {
 				.wrapper.style3 button:hover,
 				.wrapper.style3 .button:hover {
 					background-color: rgba(144, 144, 144, 0.075);
+					box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+				  transform: translateY(-3px);
 				}
 
 				.wrapper.style3 input[type="submit"]:active,
@@ -3564,7 +3610,10 @@ input, select, textarea {
 	}
 
 	@media screen and (max-width: 736px) and (orientation: portrait) {
-
+		.iphone{
+			width: 200px;
+			margin-top: 50px;
+		}
 		.wrapper {
 			padding: 3em 1.5em 1em 1.5em ;
 		}
@@ -3639,7 +3688,7 @@ input, select, textarea {
 }
 
 	#header {
-		background-color: #4696e5;
+		background-color: #157159;
 		color: #d1e5f9;
 		padding: 4.5em 0 2.5em 0 ;
 		-moz-align-items: center;
@@ -3667,8 +3716,9 @@ input, select, textarea {
 		#header input[type="button"],
 		#header button,
 		#header .button {
+			text-decoration: none;
 			background-color: transparent;
-			color: #ffffff !important;
+			color: #ffffff;
 			box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
 		}
 
@@ -3677,7 +3727,9 @@ input, select, textarea {
 			#header input[type="button"]:hover,
 			#header button:hover,
 			#header .button:hover {
-				background-color: rgba(255, 255, 255, 0.075);
+				background-color: #eafcf3;
+				box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+			  transform: translateY(-3px);
 			}
 
 			#header input[type="submit"]:active,
@@ -3686,6 +3738,8 @@ input, select, textarea {
 			#header button:active,
 			#header .button:active {
 				background-color: rgba(255, 255, 255, 0.2);
+				border: none;
+				border-color: transparent;
 			}
 
 			#header input[type="submit"].primary,
@@ -3695,7 +3749,7 @@ input, select, textarea {
 			#header .button.primary {
 				box-shadow: none;
 				background-color: #ffffff;
-				color: #4696e5 !important;
+				color: #11a25a !important;
 			}
 
 		#header label {
@@ -3717,7 +3771,7 @@ input, select, textarea {
 			#header input[type="email"]:focus,
 			#header select:focus,
 			#header textarea:focus {
-				border-color: #ffffff;
+				border: none;
 				box-shadow: 0 0 0 1px #ffffff;
 			}
 
@@ -3829,6 +3883,8 @@ input, select, textarea {
 			color: inherit;
 			border-bottom-color: rgba(255, 255, 255, 0.5);
 			color: #ffffff;
+			margin-right: 10px;
+			padding-left: 0px;
 		}
 
 		#header strong, #header b {
@@ -3888,8 +3944,8 @@ input, select, textarea {
 			#header .content .actions {
 				-moz-justify-content: -moz-flex-end;
 				-webkit-justify-content: -webkit-flex-end;
-				-ms-justify-content: -ms-flex-end;
-				justify-content: flex-end;
+				-ms-justify-content: -ms-center;
+				justify-content: center;
 			}
 
 		#header .image {
@@ -4174,4 +4230,15 @@ input, select, textarea {
 			padding: 3em 1.5em 1em 1.5em ;
 		}
 
+	}
+	.navbar-toggler{
+		border: none !important;
+		border-radius: 0px !important;
+		box-shadow: inset 0 0 0 0 #dff5e3;
+		color: #343a40;
+	}
+	.navbar-toggler:hover{
+		background-color: transparent;
+		box-shadow: none;
+		transform: none;
 	}

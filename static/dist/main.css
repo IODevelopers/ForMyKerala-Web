@@ -21,7 +21,7 @@ img {
 body,
 figure {
     margin: 0;
-    background-color: #2e9dd4;
+    background-color: #fff;
 }
 
 .img-thumbnail,
@@ -1828,24 +1828,25 @@ a.text-warning:hover {
 }
 
 .text-danger {
-    color: #a94442
+    color: #a94442;
 }
 
 a.text-danger:hover {
-    color: #843534
+    color: #843534;
 }
 
 .bg-primary {
-    color: #fff;
-    background-color: #337ab7
+    color: black;
+    background: #fff;
+    background-color: #fff;
 }
 
 a.bg-primary:hover {
-    background-color: #286090
+    background-color: #286090;
 }
 
 .bg-success {
-    background-color: #dff0d8
+    background-color: #dff0d8;
 }
 
 a.bg-success:hover {
@@ -7920,7 +7921,7 @@ form[action*='list-manage.com'] .small-meta {
 }
 
 .switchable div[class*=col-]:last-child {
-    
+
 }
 
 
