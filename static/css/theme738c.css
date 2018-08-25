@@ -164,6 +164,13 @@ samp {
   font-family: monospace, monospace;
   font-size: 1em;
 }
+.btn-primary{
+  background-color: #11a25a !important;
+  color: white;
+}
+.button{
+  background-color: #ffffff;
+}
 
 button,
 input,
@@ -8862,7 +8869,7 @@ a.homepage__producthunt {
   background-size: cover;
   background-position: center;
   padding: 30px;
-  color: white;
+  color: black;
 }
 
 .invite h1 {
@@ -8892,7 +8899,7 @@ a.homepage__producthunt {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 .invitepage__pageinner {
