@@ -21,7 +21,11 @@ def is_logged_in(f):	# Function for implementing security and redirection
 
 @app.route('/', methods=['GET','POST']) #landing page
 def home():
-    return render_template("index.html")
+    try:
+        if session['logged_in'] == True:
+            return redirect(url_for('dashvolunteer'))
+    except:
+        return render_template("index.html")
 
 
 @app.route('/accept/<string:timeindex>',methods=['GET','POST'])
@@ -104,17 +108,28 @@ def login():
 @app.route('/donate', methods=['GET','POST']) #landing page
 def donate():
     if request.method =="POST":
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        items_from_web = r.json()
+        items_from_web = items_from_web['Items']
         name = request.form['name']
         phone = request.form['phone']
         address = request.form['address']
-        count = request.form['no']
-        item = request.form['item']
+        items_required = {}
+        
         district = request.form['district']
-        print(name,phone,address,count,item)
+        
         time1 = time.time()
         time1 = str(time1)
+        for each_item in items_from_web:
+            try:
+                items_required[each_item] = request.form[each_item]
+            except:
+                print("%s is not added" % each_item)
+        print(name,phone,address,items_required)
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/registerdonor'
-        data = {'TimeIndex':time1 ,'Name':name,'PhoneNumber':phone,'Address':address,'Count':count,'Item':item,'Platform':"Web",'District':district}
+        data = {'TimeIndex':time1 ,'Name':name,'PhoneNumber':phone,'Items':items_required,'Address':address,'Platform':"Web",'District':district}
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
         data = r.json()
@@ -136,23 +151,32 @@ def donate():
 
 
 
-
-
 @app.route('/requesthelp', methods=['GET','POST']) #landing page
 def requesthelp():
     if request.method =="POST":
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        items_from_web = r.json()
+        items_from_web = items_from_web['Items']
         name = request.form['name']
         phone = request.form['phone']
         address = request.form['address']
-        count = request.form['no']
-        item = request.form['item']
+        items_required = {}
         district = request.form['district']
-        print(name,phone,address,count,item)
-        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web'
-        data = {'Name':name,'PhoneNumber':phone,'Address':address,'Count':count,'Item':item,'Platform':"Web",'District':district}
+        for each_item in items_from_web:
+            try:
+                items_required[each_item] = request.form[each_item]
+            except:
+                print("%s is not added" % each_item)
+        print(name,phone,address,items_required)
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register'
+        data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district}
+        print(data)
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
         data = r.json()
+        print(data)
         message = "Successfully Registered"
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
         headers = {'content-type': 'application/json'}
@@ -171,7 +195,7 @@ def requesthelp():
 @is_logged_in 
 def dashvolunteer():
     # data from web
-    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getrequest"
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-unverified-request"
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
     data = r.json()
@@ -204,7 +228,7 @@ def logout():
 def dash():
 
     # data from web
-    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getrequest"
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web"
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
     data = r.json()
