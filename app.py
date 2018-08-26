@@ -228,10 +228,11 @@ def logout():
 def dash():
 
     # data from web
-    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web"
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getrequest"
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
     data = r.json()
+    print(data)
     
     #data from app
     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getall"

@@ -362,8 +362,12 @@ Register
                               <td>{{data['Items'][i]['PhoneNumber']}}</td>
                               <td>{{data['Items'][i]['Address']}}</td>
                               <td>{{data['Items'][i]['District']}}</td>
-                              <td>{{data['Items'][i]['Item']}}</td>
-                              <td>{{data['Items'][i]['Count']}}</td>
+                              <td>{%for j in data['Items'][i]['Items'].keys()%}
+                                {{ j }} &nbsp;
+                                      {% endfor %}</td>
+                                <td>{%for j in data['Items'][i]['Items'].keys()%}
+                                      {{ data['Items'][i]['Items'][j] }} &nbsp;
+                                            {% endfor %}</td>
                             </tr>
                           </tbody>
                           {% endfor %}
@@ -432,8 +436,8 @@ Register
                                   <td>{{donorweb['Items'][i]['PhoneNumber']}}</td>
                                   <td>{{donorweb['Items'][i]['Address']}}</td>
                                   <td>{{donorweb['Items'][i]['District']}}</td>
-                                  <td>{{donorweb['Items'][i]['Item']}}</td>
-                                  <td>{{donorweb['Items'][i]['Count']}}</td>
+
+                                  
                                 </tr>
                               </tbody>
                               {% endfor %}
