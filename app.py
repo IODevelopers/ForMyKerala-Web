@@ -9,7 +9,7 @@ from flask import Flask ,render_template, redirect, url_for, session, request, l
 from flask_sslify import SSLify
 
 app = Flask(__name__)
-ssl=SSLify(app)
+# ssl=SSLify(app)
 
 def is_logged_in(f):	# Function for implementing security and redirection
 	@wraps(f)
@@ -237,10 +237,10 @@ def dash():
     print(data)
     
     #data from app
-    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getall"
-    headers = {'content-type': 'application/json'}
-    r=requests.post(url, headers=headers)
-    android = r.json()
+#     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getall"
+#     headers = {'content-type': 'application/json'}
+#     r=requests.post(url, headers=headers)
+#     android = r.json()
     
     
 
@@ -253,14 +253,15 @@ def dash():
     
 
     #data donors web
-    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
-    headers = {'content-type': 'application/json'}
-    r=requests.post(url, headers=headers)
-    donorweb = r.json()
+#     url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
+#     headers = {'content-type': 'application/json'}
+#     r=requests.post(url, headers=headers)
+#     donorweb = r.json()
     
 
 
-    return render_template("active_req.html",data=data,donorweb=donorweb,android=android,donors=donors)
+#     return render_template("active_req.html",data=data,donorweb=donorweb,android=android,donors=donors)
+    return render_template("active_req.html",data=data,donors=donors)
 
 @app.context_processor
 def date_processor():
