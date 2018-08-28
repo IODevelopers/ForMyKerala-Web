@@ -131,7 +131,7 @@ def donate():
                 print("%s is not added" % each_item)
         print(name,phone,address,items_required)
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/registerdonor'
-        data = {'TimeIndex':time1 ,'Name':name,'PhoneNumber':phone,'Items':items_required,'Address':address,'Platform':"Web",'District':district}
+        data = {'TimeIndex':time1 ,'Name':name,'PhoneNumber':phone,'DonationItems':items_required,'Address':address,'Platform':"Web",'District':district}
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
         data = r.json()
