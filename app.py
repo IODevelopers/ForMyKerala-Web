@@ -9,7 +9,7 @@ from flask import Flask ,render_template, redirect, url_for, session, request, l
 from flask_sslify import SSLify
 
 app = Flask(__name__)
-sslify = SSLify(app)
+ssl=SSLify(app)
 
 def is_logged_in(f):	# Function for implementing security and redirection
 	@wraps(f)
