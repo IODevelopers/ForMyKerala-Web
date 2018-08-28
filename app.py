@@ -170,7 +170,7 @@ def requesthelp():
             except:
                 print("%s is not added" % each_item)
         print(name,phone,address,items_required)
-        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register'
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web'
         data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district}
         print(data)
         headers = {'content-type': 'application/json'}
