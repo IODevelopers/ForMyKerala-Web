@@ -49,12 +49,12 @@
     
                 <div class="" id="required-items">
                     Items &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="item" id="item-list">
+                    <select name="item" id="item-list" required>
                         {%for i in range(0,count)%}
-                        <option value ="{{data['Items'][i]}}">{{data['Items'][i]}}</option>
+                        <option value ="{{data['Items'][i]}}" >{{data['Items'][i]}}</option>
                         {% endfor %}
                     </select>
-                    <input type="button" name="button-add-item" value="Add Item" onclick="addItems()">
+                    <input type="button" name="button-add-item" value="Add Item" onclick="addItems()" required>
 
                                             </div>
             </div><br>

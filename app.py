@@ -74,7 +74,7 @@ def acceptadmin(timeindex):
     if timeindexlist[1] == 'null':
         return redirect(url_for('admin_dashboard'))
     url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/verification/request'
-    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':'Admin'}
     headers = {'content-type': 'application/json'}
     r=requests.post(url, data=json.dumps(data), headers=headers)
     data = r.json()
@@ -88,7 +88,7 @@ def acceptadmin1(timeindex):
     if timeindexlist[1] == 'null':
         return redirect(url_for('admin_dashboard'))
     url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/verification/donations'
-    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':'Admin'}
     headers = {'content-type': 'application/json'}
     r=requests.post(url, data=json.dumps(data), headers=headers)
     data = r.json()
