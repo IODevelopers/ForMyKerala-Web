@@ -259,14 +259,26 @@
         function verify(TimeIndex,PhoneNumber){
             if (confirm("Are you sure you want to Verify?")) {
                     alert("Verified by "+PhoneNumber);
-                    window.location = "accept/"+TimeIndex+"&"+PhoneNumber;
+                    window.location = "acceptadmin/"+TimeIndex+"&"+PhoneNumber;
                         }
 
         }
         function verify1(TimeIndex,PhoneNumber){
             if (confirm("Are you sure you want to Verify?")) {
                     alert("Verified by "+PhoneNumber);
-                    window.location = "accept1/"+TimeIndex+"&"+PhoneNumber;
+                    window.location = "acceptadmin1/"+TimeIndex+"&"+PhoneNumber;
+            }
+        }
+        function delete1(TimeIndex,PhoneNumber){
+            if (confirm("Are you sure you want to Delete?")) {
+                    alert("Deleted by "+PhoneNumber);
+                    window.location = "delete1/"+TimeIndex+"&"+PhoneNumber;
+            }
+        }
+        function delete2(TimeIndex,PhoneNumber){
+            if (confirm("Are you sure you want to Delete?")) {
+                    alert("Deleted by "+PhoneNumber);
+                    window.location = "delete2/"+TimeIndex+"&"+PhoneNumber;
             }
         }
     </script>
@@ -366,6 +378,7 @@ Logout
                               <th>District</th>
                               <th>Item &amp; count</th>
                               <th>Status</th>
+                              <th>Delete</th>
                             </tr>
                           </thead>
                  
@@ -386,6 +399,14 @@ Logout
                               <td> <button style ="background-color: #275dbf7d;" class="btn" onclick="verify({{android['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
                               {% endif %}
 
+                              {% if android['Items'][i]['Status_Now'] == "Deleted" %}
+                              <td> <button style ="background-color: #2661f5cb;" class="btn" >&nbsp;&nbsp; Deleted &nbsp;&nbsp;</button></td>
+                              {% else %}
+                              <td> <button style ="background-color: #f52626cb;" class="btn" onclick="delete1({{android['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Delete This Entry&nbsp;&nbsp;</button></td>
+                              {% endif %}
+
+
+                           
                                             </tr>
 
                           </tbody>
@@ -407,6 +428,7 @@ Logout
                                   <th>District</th>
                                   <th>Item &amp; count</th>
                                   <th>Status</th>
+                                  <th>Delete</th>
                                 </tr>
                               </thead>
                               {%for i in range(0,donors['Count'])%}
@@ -426,7 +448,11 @@ Logout
                                     {% else %}
                                     <td> <button style ="background-color: #275dbf7d;" class="btn" onclick="verify1({{donors['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
                                     {% endif %}
-
+                                    {% if donors['Items'][i]['Status_Now'] == "Deleted" %}
+                              <td> <button style ="background-color: #2661f5cb;" class="btn" >&nbsp;&nbsp; Deleted &nbsp;&nbsp;</button></td>
+                              {% else %}
+                              <td> <button style ="background-color: #f52626cb;" class="btn" onclick="delete2({{donors['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Delete This Entry&nbsp;&nbsp;</button></td>
+                              {% endif %}
                             </tr>
                               
                               {% endfor %}

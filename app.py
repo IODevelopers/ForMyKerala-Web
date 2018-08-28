@@ -6,7 +6,7 @@ import time
 from functools import wraps
 import requests
 from flask import Flask ,render_template, redirect, url_for, session, request, logging
-from flask_sslify import SSLify
+
 
 app = Flask(__name__)
 # ssl=SSLify(app)
@@ -65,6 +65,74 @@ def accept1(timeindex):
     data = r.json()
     print(data)
     return redirect(url_for('dashvolunteer'))
+
+@app.route('/acceptadmin/<string:timeindex>',methods=['GET','POST'])
+@is_admin_logged_in 
+def acceptadmin(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('admin_dashboard'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/verification/request'
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    return redirect(url_for('admin_dashboard'))
+
+@app.route('/acceptadmin1/<string:timeindex>',methods=['GET','POST'])
+@is_admin_logged_in 
+def acceptadmin1(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('admin_dashboard'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/verification/donations'
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    return redirect(url_for('admin_dashboard'))
+
+
+
+
+
+
+@app.route('/delete1/<string:timeindex>',methods=['GET','POST'])
+@is_admin_logged_in 
+def delete1(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('admin_dashboard'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/admin/deleterequest'
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    return redirect(url_for('admin_dashboard'))
+
+@app.route('/delete2/<string:timeindex>',methods=['GET','POST'])
+@is_admin_logged_in 
+def delete2(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('admin_dashboard'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/admin/deletedonor'
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    return redirect(url_for('admin_dashboard'))
+
+
+
+
 
 
 
@@ -131,6 +199,7 @@ def admin_login():
             # session['District']=data['District']
             # session['Name']=data['Name']
             session['admin_logged_in'] = True
+            session['PhoneNumber']='123'
             return redirect(url_for('admin_dashboard'))
         elif data['Validation'] == "False":
             message = "Invalid credentials"
