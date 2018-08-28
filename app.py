@@ -131,7 +131,7 @@ def donate():
                 print("%s is not added" % each_item)
         print(name,phone,address,items_required)
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/registerdonor'
-        data = {'TimeIndex':time1 ,'Name':name,'PhoneNumber':phone,'DonationItems':items_required,'Address':address,'Platform':"Web",'District':district}
+        data = {'TimeIndex':time1 ,'Name':name,'PhoneNumber':phone,'Items':items_required,'Address':address,'Platform':"Web",'District':district}
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
         data = r.json()
@@ -200,25 +200,24 @@ def dashvolunteer():
     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-unverified-request"
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
-    data = r.json()
-    #data from app
-    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getall"
-    headers = {'content-type': 'application/json'}
-    r=requests.post(url, headers=headers)
     android = r.json()
+    #data from app
+#     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getall"
+#     headers = {'content-type': 'application/json'}
+#     r=requests.post(url, headers=headers)
+#     android = r.json()
     #data donors android
-    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getdonor'
-    headers = {'content-type': 'application/json'}
-    r=requests.post(url, headers=headers)
-    donors = r.json()
+#     url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getdonor'
+#     headers = {'content-type': 'application/json'}
+#     r=requests.post(url, headers=headers)
+#     donors = r.json()
     
     #data donors web
     url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
-    donorweb = r.json()  
-    print(donorweb)
-    return render_template("dashvolunteer.html",data=data,donorweb=donorweb,android=android,donors=donors)
+    donors = r.json() 
+    return render_template("dashvolunteer.html",android=android,donors=donors)
 
 @app.route('/logout')
 def logout():

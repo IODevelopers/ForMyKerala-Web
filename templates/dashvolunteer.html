@@ -364,33 +364,11 @@ Logout
                               <th>Phone</th>
                               <th>Address</th>
                               <th>District</th>
-                              <th>Item</th>
-                              <th>Count</th>
+                              <th>Item &amp; count</th>
                               <th>Status</th>
                             </tr>
                           </thead>
-                          {%for i in range(0,data['Count'])%}
-                          <tbody>
-                            <tr>
-                              <td>{{change_epoch(data['Items'][i]['TimeIndex'])}}</td>
-                              <td>{{data['Items'][i]['Name']}}</td>
-                              <td>{{data['Items'][i]['PhoneNumber']}}</td>
-                              <td>{{data['Items'][i]['Address']}}</td>
-                              <td>{{data['Items'][i]['District']}}</td>
-                              <td>{{data['Items'][i]['Item']}}</td>
-                              <td>{{data['Items'][i]['Count']}}</td>
-
-
-                              {% if data['Items'][i]['Status_Now'] == "Verified" %}
-                              <td> <button style ="background-color: #27bf317d;" class="btn">&nbsp;&nbsp;Verified by  {{data['Items'][i]['Verified_by']}} &nbsp;&nbsp;</button></td>
-                              {% else %}
-                              <td> <button style ="background-color: #275dbf7d;" class="btn" onclick="verify({{data['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
-                              {% endif %}
-
-
-                            </tr>
-                          </tbody>
-                          {% endfor %}
+                 
                           {%for i in range(0,android['Count'])%}
                           <tbody>
                             <tr>
@@ -400,11 +378,8 @@ Logout
                               <td>{{android['Items'][i]['Address']}}</td>
                               <td>{{android['Items'][i]['District']}}</td>
                               <td>{%for j in android['Items'][i]['Items'].keys()%}
-                                    {{ j }} &nbsp;
+                                    {{ j }} &nbsp; {{ android['Items'][i]['Items'][j] }}<br/>
                                           {% endfor %}</td>
-                                    <td>{%for j in android['Items'][i]['Items'].keys()%}
-                                          {{ android['Items'][i]['Items'][j] }} &nbsp;
-                                                {% endfor %}</td>
                             {% if android['Items'][i]['Status_Now'] == "Verified" %}
                               <td> <button style ="background-color: #27bf317d;" class="btn">&nbsp;&nbsp;Verified by  {{android['Items'][i]['Verified_by']}} &nbsp;&nbsp;</button></td>
                               {% else %}
@@ -430,8 +405,7 @@ Logout
                                   <th>Phone</th>
                                   <th>Address</th>
                                   <th>District</th>
-                                  <th>Item</th>
-                                  <th>Count</th>
+                                  <th>Item &amp; count</th>
                                   <th>Status</th>
                                 </tr>
                               </thead>
@@ -444,15 +418,9 @@ Logout
                                   <td>{{donors['Items'][i]['Taluk']}}</td>
                                   <td>{{donors['Items'][i]['District']}}</td>
                                   <td>{%for j in donors['Items'][i]['DonationItems'].keys()%}
-                                        {{ j }} &nbsp;
+                                        {{ j }} &nbsp; {{ donors['Items'][i]['DonationItems'][j] }} &nbsp;<br/>
                                         {% endfor %}
                                   </td>
-                                    <td>
-                                        {%for j in donors['Items'][i]['DonationItems'].keys()%}
-                                              {{ donors['Items'][i]['DonationItems'][j] }} &nbsp;
-                                       {% endfor %}
-                                    </td>
-
                                     {% if donors['Items'][i]['Status_Now'] == "Verified" %}
                                     <td> <button style ="background-color: #27bf317d;" class="btn">&nbsp;&nbsp;Verified by  {{donors['Items'][i]['Verified_by']}}   &nbsp;&nbsp;</button></td>
                                     {% else %}
@@ -460,24 +428,7 @@ Logout
                                     {% endif %}
 
                             </tr>
-                              {% endfor %}
-                              {%for i in range(0,donorweb['Count'])%}
-
-                                <tr>
-                                  <td>{{change_epoch(donorweb['Items'][i]['TimeIndex'])}}</td>
-                                  <td>{{donorweb['Items'][i]['Name']}}</td>
-                                  <td>{{donorweb['Items'][i]['PhoneNumber']}}</td>
-                                  <td>{{donorweb['Items'][i]['Address']}}</td>
-                                  <td>{{donorweb['Items'][i]['District']}}</td>
-                                  <td>{{donorweb['Items'][i]['Item']}}</td>
-                                  <td>{{donorweb['Items'][i]['Count']}}</td>
-                                  {% if donorweb['Items'][i]['Status_Now'] == "Verified" %}
-                              <td> <button style ="background-color: #27bf317d;" class="btn">&nbsp;&nbsp;Verified by  {{donorweb['Items'][i]['Verified_by']}} &nbsp;&nbsp;</button></td>
-                              {% else %}
-                              <td> <button style ="background-color: #275dbf7d;" class="btn" onclick="verify1({{donorweb['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
-                              {% endif %}
-                                </tr>
-
+                              
                               {% endfor %}
 
 
