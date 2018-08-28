@@ -20,6 +20,15 @@ def is_logged_in(f):	# Function for implementing security and redirection
 			return redirect(url_for('login'))
 	return wrap	# A wrap is a concept that is used to check for authorisation of a request
 
+def is_admin_logged_in(f):    # Function for implementing security and redirection
+    @wraps(f)
+    def wrap(*args,**kwargs):
+        if 'admin_logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            return redirect(url_for('home'))
+    return wrap # A wrap is a concept that is used to check for authorisation of a request
+
 
 @app.route('/', methods=['GET','POST']) #landing page
 def home():
@@ -105,6 +114,47 @@ def login():
     return render_template("login.html")
 
 
+@app.route('/admin-login', methods=['GET','POST']) #landing page
+def admin_login():
+    if request.method =="POST":
+        username = request.form['username']
+        password = request.form['password']
+        url= "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/admin/login"
+        data = {'username':username, 'password': password}
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url, data=json.dumps(data), headers=headers)
+        data = r.json()
+        if data['Validation'] == "True":
+            # session['PhoneNumber']=data['PhoneNumber']
+            # session['TimeIndex']=data['TimeIndex']
+            # session['Email']=data['Email']
+            # session['District']=data['District']
+            # session['Name']=data['Name']
+            session['admin_logged_in'] = True
+            return redirect(url_for('admin_dashboard'))
+        elif data['Validation'] == "False":
+            message = "Invalid credentials"
+        else:
+            message = "Can't connect to server!"
+
+        return render_template("admin-login.html", message=message)
+    return render_template("admin-login.html")
+
+@app.route('/admin-dashboard', methods=['GET','POST'])
+@is_admin_logged_in 
+def admin_dashboard():
+    # data requests
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-unverified-request"
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    android = r.json()
+    
+    #data donors
+    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    donors = r.json() 
+    return render_template("admin-dashboard.html",android=android,donors=donors)
 
 
 @app.route('/donate', methods=['GET','POST']) #landing page
@@ -194,7 +244,7 @@ def requesthelp():
     return render_template("assistance.html", data = data,count = count)
 
 @app.route('/dashboardvolunteer', methods=['GET','POST'])
-@is_logged_in 
+@is_logged_in
 def dashvolunteer():
     # data from web
     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-unverified-request"
