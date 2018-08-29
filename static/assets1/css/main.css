@@ -57,6 +57,29 @@ Secondary Green (button text): #11a25a
 
 */
 
+/* Help */
+.help-title {
+	padding-left: 20px;
+	padding-right: 20px
+}
+
+.help-image {
+	align-content: center !important;
+	padding-left: 80px;
+	padding-right: 80px;
+	padding-bottom: 50px;
+	padding-top: 30px;
+	
+}
+@media screen and (max-width: 600px) {
+		
+	.help-image {
+		padding-left: 30px;
+		padding-right: 30px;
+		padding-bottom: 20px;
+		padding-top: 20px;
+	}	
+}
 /*Nav end*/
 ol, ul {
 	list-style: none;
