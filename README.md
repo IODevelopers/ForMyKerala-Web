@@ -21,7 +21,7 @@ The app was developed in order to help rehabilitate the refugees into proper hou
   
 # Designs:
   [Philson Philip](https://github.com/philson-philip)<br>
-  [Abin Mathew](abinm8@gmail.com)
+  [Abin Mathew](https://github.com/abinm8)
 
 
 # Web:
