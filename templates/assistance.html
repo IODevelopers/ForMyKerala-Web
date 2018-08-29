@@ -64,21 +64,17 @@
                     <br>
                     <div class="CenteredPage__field">
                       Items
-                      <div>
-                            <select class="form-control form-control-sm" name="item">
+                      <div id="required-items">
+                            <select class="form-control form-control-sm" name="item" id="item-list">
                                 {%for i in range(0,count)%}
-                                <option value ="{{data['Items'][i]}}">{{data['Items'][i]}}</option>
+                                    <option value ="{{data['Items'][i]}}">{{data['Items'][i]}}</option>
                                 {% endfor %}
                             </select>
+                            <input type="button" name="button-add-item" value="Add Item" onclick="addItems()">
                         </div>
                       </div>
                       <br>
-                    <div class="CenteredPage__field">
-                            Number of Items
-                        <div class="">
-                          <input id="name" type="number"  name="no" value="" required>
-                        </div>
-                  </div>
+                
                     <div class="CenteredPage__field">
                             Address
 
