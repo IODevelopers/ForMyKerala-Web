@@ -55,7 +55,6 @@ Primary Green : #16765aed
 Secondary Green (button text): #11a25a
 
 
-
 */
 
 /*Nav end*/
@@ -3611,7 +3610,7 @@ input, select, textarea {
 
 	@media screen and (max-width: 736px) and (orientation: portrait) {
 		.iphone{
-			width: 200px;
+			width: 160px;
 			margin-top: 50px;
 		}
 		.wrapper {
@@ -4159,9 +4158,9 @@ input, select, textarea {
 /* Footer */
 
 	#footer {
-		background-color: #f7f7f7;
+		background-color: #f8f9fa;
 		color: #999999;
-		padding: 4.5em 0 2.5em 0 ;
+		padding: 2em 1em 0.5em 1em ;
 		color: #b0b0b0;
 		text-align: center;
 	}
@@ -4169,15 +4168,21 @@ input, select, textarea {
 		#footer input, #footer select, #footer textarea {
 			color: #999999;
 		}
-
 		#footer a {
 			color: inherit;
 			border-bottom-color: #c6c6c6;
+			text-decoration: none;
 		}
 
-			#footer a:hover {
-				color: #4696e5;
+		#footer a:hover {
+				color: #28a745;
 			}
+		#footer .fa-github:hover{
+			color: black;
+		}
+		#footer .fa-android:hover{
+			color: #a4c639;
+		}
 
 		#footer strong, #footer b {
 			color: #828282;
@@ -4211,7 +4216,7 @@ input, select, textarea {
 		@media screen and (max-width: 980px) {
 
 			#footer {
-				padding: 4em 4em 2em 4em ;
+				padding: 2em 0em 1em 0em ;
 			}
 
 		}
@@ -4237,8 +4242,30 @@ input, select, textarea {
 		box-shadow: inset 0 0 0 0 #dff5e3;
 		color: #343a40;
 	}
+	.navbar-toggler:focus{
+		outline: none; !important
+	}
 	.navbar-toggler:hover{
 		background-color: transparent;
 		box-shadow: none;
 		transform: none;
 	}
+.bg-primary{
+	background-color: #16765aed; !important
+}
+.download{
+	padding: 150px 0;
+	background-color: #004931;
+	color: white;
+}
+
+section.download .badges .badge-link img {
+    height: 80px;
+}
+/*
+Theme Color Used
+Primary Green : #16765aed
+Secondary Green (button text): #11a25a
+
+#013a34
+*/
