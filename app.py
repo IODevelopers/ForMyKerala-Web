@@ -478,5 +478,4 @@ def volunteer():
 
 if __name__=='__main__':
     app.secret_key='secret123'
-    app.debug=True
     app.run(threaded=True,host="0.0.0.0",port=80)
