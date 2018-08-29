@@ -281,6 +281,24 @@
                     window.location = "delete2/"+TimeIndex+"&"+PhoneNumber;
             }
         }
+        function comment(TimeIndex){
+            if (confirm("Are you sure you want to Comment?")) {
+                    var x = prompt("Enter Comment");
+                    window.location = "commentadmin/"+TimeIndex+"&"+x;
+            }
+        }
+        function comment1(TimeIndex){
+            if (confirm("Are you sure you want to Comment?")) {
+                    var x = prompt("Enter Comment");
+                    window.location = "commentadmin1/"+TimeIndex+"&"+x;
+            }
+        }
+        function close1(TimeIndex){
+            if (confirm("Are you sure you want to Close?")) {
+                    
+                    window.location = "closeadmin1/"+TimeIndex
+            }
+        }
     </script>
     <title>For My Kerala</title>
 
@@ -379,6 +397,9 @@ Logout
                               <th>Item &amp; count</th>
                               <th>Status</th>
                               <th>Delete</th>
+                              <th>Comment</th>
+                              <th>Comment Button</th>
+                              <th>Close the entry</th>
                             </tr>
                           </thead>
                  
@@ -405,6 +426,14 @@ Logout
                               <td> <button style ="background-color: #f52626cb;" class="btn" onclick="delete1({{android['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Delete This Entry&nbsp;&nbsp;</button></td>
                               {% endif %}
 
+                              <td>{{ android['Items'][i]['Comments'] }}</td>
+                              <td><button style ="background-color: #00326f7d;" class="btn" onclick="comment({{android['Items'][i]['TimeIndex']}})">&nbsp;&nbsp;Add comment&nbsp;&nbsp;</button></td>
+                              {% if android['Items'][i]['Status_Now'] == "Closed" %}
+                              <td><button style ="background-color: #ff0000db;" class="btn" >&nbsp;&nbsp;This Entry is Closed &nbsp;&nbsp;</button></td>
+                              {% else %}
+                              <td><button style ="background-color: #ac0b0b7d;" class="btn" onclick="close1({{android['Items'][i]['TimeIndex']}})">&nbsp;&nbsp;Close this entry &nbsp;&nbsp;</button></td>
+                              {% endif %}
+
 
                            
                                             </tr>
@@ -429,6 +458,8 @@ Logout
                                   <th>Item &amp; count</th>
                                   <th>Status</th>
                                   <th>Delete</th>
+                                  <th>Comment</th>
+                              <th>Comment Button</th>
                                 </tr>
                               </thead>
                               {%for i in range(0,donors['Count'])%}
@@ -453,6 +484,8 @@ Logout
                               {% else %}
                               <td> <button style ="background-color: #f52626cb;" class="btn" onclick="delete2({{donors['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Delete This Entry&nbsp;&nbsp;</button></td>
                               {% endif %}
+                              <td>{{ donors['Items'][i]['Comments'] }}</td>
+                              <td><button style ="background-color: #00326f7d;" class="btn" onclick="comment1({{donors['Items'][i]['TimeIndex']}})">&nbsp;&nbsp;Add comment&nbsp;&nbsp;</button></td>
                             </tr>
                               
                               {% endfor %}

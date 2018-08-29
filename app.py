@@ -95,6 +95,55 @@ def acceptadmin1(timeindex):
     print(data)
     return redirect(url_for('admin_dashboard'))
 
+@app.route('/commentadmin/<string:timeindex>',methods=['GET','POST'])
+def commentadmin(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('admin_dashboard'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/add-comment'
+    data = {'TimeIndex':timeindexlist[0],'Comments':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    return redirect(url_for('admin_dashboard'))
+
+@app.route('/commentadmin1/<string:timeindex>',methods=['GET','POST'])
+def commentadmin1(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('admin_dashboard'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/add-comment'
+    data = {'TimeIndex':timeindexlist[0],'Comments':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    print("I'm Here")
+    return redirect(url_for('admin_dashboard'))
+
+@app.route('/closeadmin1/<string:timeindex>',methods=['GET','POST'])
+def closeadmin1(timeindex):
+    print(timeindex)
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/close-request'
+    data = {'TimeIndex':timeindex}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    print("I'm Here1")
+    return redirect(url_for('admin_dashboard'))
+
+
+
+
+
+
+
+
+
 
 @app.route('/comment/<string:timeindex>',methods=['GET','POST'])
 def comment(timeindex):
