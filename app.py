@@ -96,6 +96,49 @@ def acceptadmin1(timeindex):
     return redirect(url_for('admin_dashboard'))
 
 
+@app.route('/comment/<string:timeindex>',methods=['GET','POST'])
+def comment(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('dashvolunteer'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/add-comment'
+    data = {'TimeIndex':timeindexlist[0],'Comments':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    return redirect(url_for('dashvolunteer'))
+
+@app.route('/comment1/<string:timeindex>',methods=['GET','POST'])
+def comment1(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('dashvolunteer'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/add-comment'
+    data = {'TimeIndex':timeindexlist[0],'Comments':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    print("I'm Here")
+    return redirect(url_for('dashvolunteer'))
+
+@app.route('/close1/<string:timeindex>',methods=['GET','POST'])
+def close1(timeindex):
+    print(timeindex)
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/close-request'
+    data = {'TimeIndex':timeindex}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    print("I'm Here1")
+    return redirect(url_for('dashvolunteer'))
+
+
+
 
 
 
@@ -280,6 +323,7 @@ def requesthelp():
         r=requests.get(url, headers=headers)
         items_from_web = r.json()
         items_from_web = items_from_web['Items']
+        
         name = request.form['name']
         phone = request.form['phone']
         address = request.form['address']
@@ -290,14 +334,21 @@ def requesthelp():
                 items_required[each_item] = request.form[each_item]
             except:
                 print("%s is not added" % each_item)
-        print(name,phone,address,items_required)
+        if len(items_required.keys()) == 0:
+            message = "Items cannot be empty Please select one"
+            url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+            headers = {'content-type': 'application/json'}
+            r=requests.get(url, headers=headers)
+            data = r.json()
+            count = len(data['Items'])
+            return render_template("assistance.html",message = message,data = data,count = count)
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web'
         data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district}
-        print(data)
+        
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
         data = r.json()
-        print(data)
+        
         message = "Successfully Registered"
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
         headers = {'content-type': 'application/json'}
