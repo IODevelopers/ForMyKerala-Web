@@ -191,8 +191,29 @@ def close1(timeindex):
     return redirect(url_for('dashvolunteer'))
 
 
+@app.route('/auth1/<string:timeindex>',methods=['GET','POST'])
+def auth1(timeindex):
+    print(timeindex)
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/volunteer/authorize'
+    data = {'TimeIndex':timeindex}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    print("I'm Here1")
+    return redirect(url_for('verifyvolunteer'))
 
-
+@app.route('/deauth1/<string:timeindex>',methods=['GET','POST'])
+def deauth1(timeindex):
+    print(timeindex)
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/volunteer/deauthorize'
+    data = {'TimeIndex':timeindex}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    print("I'm Here1")
+    return redirect(url_for('verifyvolunteer'))
 
 
 
@@ -323,6 +344,18 @@ def verifydonors():
     r=requests.post(url, headers=headers)
     donors = r.json() 
     return render_template("verifydonors.html",donors=donors)
+
+@app.route('/verifyvolunteer', methods=['GET','POST'])
+@is_admin_logged_in 
+def verifyvolunteer():
+    #data vols
+    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/volunteer/get-all'
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    vols = r.json() 
+    print(vols)
+    return render_template("verifyvolunteers.html",donors=vols)
+
 
 @app.route('/admin-dashboard', methods=['GET','POST'])
 @is_admin_logged_in 
