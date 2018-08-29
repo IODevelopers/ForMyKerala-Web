@@ -6,10 +6,10 @@ import time
 from functools import wraps
 import requests
 from flask import Flask ,render_template, redirect, url_for, session, request, logging
-from flask_sslify import SSLify
+
 
 app = Flask(__name__)
-ssl=SSLify(app)
+
 
 def is_logged_in(f):	# Function for implementing security and redirection
 	@wraps(f)
@@ -291,7 +291,14 @@ def donate():
                 items_required[each_item] = request.form[each_item]
             except:
                 print("%s is not added" % each_item)
-        print(name,phone,address,items_required)
+        if len(items_required.keys()) == 0:
+            message = "Items cannot be empty Please select one"
+            url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+            headers = {'content-type': 'application/json'}
+            r=requests.get(url, headers=headers)
+            data = r.json()
+            count = len(data['Items'])
+            return render_template("donor.html",message = message,data = data,count = count)
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/registerdonor'
         data = {'TimeIndex':time1 ,'Name':name,'PhoneNumber':phone,'Items':items_required,'Address':address,'Platform':"Web",'District':district}
         headers = {'content-type': 'application/json'}
