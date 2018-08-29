@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<noscript><link rel="stylesheet" href="../static/assets1/css/noscript.css" /></noscript>
 	</head>
-	<body class="is-preload">
+	<body data-spy="scroll" data-target=".navbar" data-offset="50" class="is-preload">
   	<nav class="navbar navbar-expand-md navbar-light fixed-top" id="mainNav">
 					<div class="container">
 					  <img src="../static/images/logo-sm.png" width="40" height="40" class="d-inline-block align-top" alt="">
@@ -20,9 +20,9 @@
 					  </button>
 					  <div class="collapse navbar-collapse" id="navbarResponsive">
 							<ul class="navbar-nav ml-auto">
-							  <li class="nav-item">
-									<a class="nav-link" href="registerVolunteer">Sign Up</a>
-							  </li>
+							  <!--<li class="nav-item">
+									<a class="nav-link" href="#">Sign Up</a>
+							  </li>-->
 							  <li class="nav-item">
 									<a class="nav-link" href="login">Login</a>
 							  </li>
@@ -36,12 +36,14 @@
 					<h2>Let's Rebuild Kerala Together</h2>
 			<div>
 					<div class="actions row">
-						<a href="donate" class="col button primary icon fa-money">Donate</a>
-						<a href="requesthelp" class="col button primary icon fa-home">I Need Help</a>
+						<a href="requesthelp" class="col button primary icon fa-home">Register Request</a>
+						<a href="feedback" class="col button primary icon fa-comments-o">Feedback</a>
 					</div>
 					<div class="actions row">
-						<a href="registerVolunteer" class="col button primary icon fa-user-circle">Volunteer</a>
+						<!--<a href="#" class="col button primary icon fa-user-circle">Volunteer</a>-->
+						<!--<a href="donate" class="col button primary icon fa-money">Donate</a>-->
 						<a href="dashboard" class="col button primary icon fa-home">View Requests</a>
+						<a href="#" class="col button primary icon fa-money">View Donations</a>
 				  </div>
 			</div>
 				</div>
@@ -51,14 +53,19 @@
 					</div>
 				</div>
 			</header>
-
-			<section id="three" class="wrapper style2 special">
-				<ul class="actions special">
-						<li><a href="https://play.google.com/store/apps/details?id=in.co.iodev.formykerala" class="button icon fa-android">Download App</a></li>
-						<li><a href="feedback" class="button icon fa-comments-o">Feedback</a></li>
-					</ul>
-
-			</section>
+			<section id="download" class="download text-center" id="download">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 mx-auto">
+            <h2 class="section-heading">Help Kerala right from your fingertips!</h2>
+            <p>Our app is available on any android mobile device! Download now to get started!</p>
+            <div class="badges">
+              <a class="badge-link" href="https://play.google.com/store/apps/details?id=in.co.iodev.formykerala"><img src="../static/images/google-play.png" alt=""></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 		<!-- Footer -->
 			<footer id="footer">

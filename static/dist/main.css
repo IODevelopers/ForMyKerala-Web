@@ -717,6 +717,9 @@ th {
     .navbar {
         display: none
     }
+    .nav-logo{
+      justify-content: center; !important
+    }
     .btn>.caret,
     .dropup>.btn>.caret {
         border-top-color: #000!important
@@ -5696,13 +5699,17 @@ ul:last-child {
 
 .btn--primary,
 .btn--primary:visited {
-    background: #275dbf7d;
-    border-color: #275dbf7d;
+    background: #157159;
+    border-color: #157159;
+    color: white;
 }
 
 .btn--primary:active,
 .btn--primary:hover {
-    background: #275dbf7d;
+    background: #157159;
+    color: white;
+    box-shadow: 1px 10px 20px rgba(46, 229, 157, 0.4);
+    transform: translateY(-1px);
 }
 
 .btn--primary-1,
@@ -9038,7 +9045,7 @@ table {
 }
 
 table th {
-    background: #275dbf7d;
+    background: #157159;
     color: #fff;
 }
 

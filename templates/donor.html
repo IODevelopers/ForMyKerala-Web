@@ -43,9 +43,9 @@
             </div>
             <br>
             <div class="CenteredPage__field">
-              <div class="">
-                  Items &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select name="item">
+              Items
+              <div>
+                  <select class="form-control form-control-sm" name="item">
                       {%for i in range(0,count)%}
                       <option value ="{{data['Items'][i]}}">{{data['Items'][i]}}</option>
                       {% endfor %}
