@@ -566,6 +566,10 @@ def volunteer():
         return render_template("registervolunteer.html",message = message)
     return render_template("registervolunteer.html")
 
+@app.route('/help', methods=['GET','POST']) 
+def website_help():
+    return render_template("help.html")
+
 
 if __name__=='__main__':
     app.secret_key='secret123'
