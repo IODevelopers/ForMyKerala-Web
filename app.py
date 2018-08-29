@@ -6,10 +6,10 @@ import time
 from functools import wraps
 import requests
 from flask import Flask ,render_template, redirect, url_for, session, request, logging
-
+from flask_sslify import SSLify
 
 app = Flask(__name__)
-# ssl=SSLify(app)
+ssl=SSLify(app)
 
 def is_logged_in(f):	# Function for implementing security and redirection
 	@wraps(f)
