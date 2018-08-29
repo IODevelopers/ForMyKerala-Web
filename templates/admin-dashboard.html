@@ -259,38 +259,28 @@
         function verify(TimeIndex,PhoneNumber){
             if (confirm("Are you sure you want to Verify?")) {
                     alert("Verified by "+PhoneNumber);
-                    window.location = "accept/"+TimeIndex+"&"+PhoneNumber;
+                    window.location = "acceptadmin/"+TimeIndex+"&"+PhoneNumber;
                         }
 
         }
         function verify1(TimeIndex,PhoneNumber){
             if (confirm("Are you sure you want to Verify?")) {
                     alert("Verified by "+PhoneNumber);
-                    window.location = "accept1/"+TimeIndex+"&"+PhoneNumber;
+                    window.location = "acceptadmin1/"+TimeIndex+"&"+PhoneNumber;
             }
         }
-        function comment(TimeIndex){
-            if (confirm("Are you sure you want to Comment?")) {
-                    var x = prompt("Enter Comment");
-                    window.location = "comment/"+TimeIndex+"&"+x;
+        function delete1(TimeIndex,PhoneNumber){
+            if (confirm("Are you sure you want to Delete?")) {
+                    alert("Deleted by "+PhoneNumber);
+                    window.location = "delete1/"+TimeIndex+"&"+PhoneNumber;
             }
         }
-        function comment1(TimeIndex){
-            if (confirm("Are you sure you want to Comment?")) {
-                    var x = prompt("Enter Comment");
-                    window.location = "comment1/"+TimeIndex+"&"+x;
+        function delete2(TimeIndex,PhoneNumber){
+            if (confirm("Are you sure you want to Delete?")) {
+                    alert("Deleted by "+PhoneNumber);
+                    window.location = "delete2/"+TimeIndex+"&"+PhoneNumber;
             }
         }
-        function close1(TimeIndex){
-            if (confirm("Are you sure you want to Close?")) {
-                    
-                    window.location = "close1/"+TimeIndex
-            }
-        }
-      
-
-
-
     </script>
     <title>For My Kerala</title>
 
@@ -332,7 +322,7 @@
                         <div class="col-xs-3 col-sm-2">
                             <a href="/">
                               <img src="../static/images/logo-sm.png" width="40" height="40" class="d-inline-block align-top" alt="">
-                              <img src="../static/images/formyk2-sm.png" height="30px" width="auto" class="d-inline-block align-top" alt=""></a>
+                              <img src="../static/images/formyk-sm.png" height="30px" width="auto" class="d-inline-block align-top" alt=""></a>
                         </div>
                         <div class="col-xs-9 col-sm-10 text-right">
 
@@ -388,9 +378,7 @@ Logout
                               <th>District</th>
                               <th>Item &amp; count</th>
                               <th>Status</th>
-                              <th>Comment</th>
-                              <th>Comment Button</th>
-                              <th>Close the entry</th>
+                              <th>Delete</th>
                             </tr>
                           </thead>
                  
@@ -410,14 +398,16 @@ Logout
                               {% else %}
                               <td> <button style ="background-color: #275dbf7d;" class="btn" onclick="verify({{android['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
                               {% endif %}
-                              <td>{{ android['Items'][i]['Comments'] }}</td>
-                              <td><button style ="background-color: #00326f7d;" class="btn" onclick="comment({{android['Items'][i]['TimeIndex']}})">&nbsp;&nbsp;Add comment&nbsp;&nbsp;</button></td>
-                              {% if android['Items'][i]['Status_Now'] == "Closed" %}
-                              <td><button style ="background-color: #ff0000db;" class="btn" >&nbsp;&nbsp;This Entry is Closed &nbsp;&nbsp;</button></td>
+
+                              {% if android['Items'][i]['Status_Now'] == "Deleted" %}
+                              <td> <button style ="background-color: #2661f5cb;" class="btn" >&nbsp;&nbsp; Deleted &nbsp;&nbsp;</button></td>
                               {% else %}
-                              <td><button style ="background-color: #ac0b0b7d;" class="btn" onclick="close1({{android['Items'][i]['TimeIndex']}})">&nbsp;&nbsp;Close this entry &nbsp;&nbsp;</button></td>
+                              <td> <button style ="background-color: #f52626cb;" class="btn" onclick="delete1({{android['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Delete This Entry&nbsp;&nbsp;</button></td>
                               {% endif %}
-                                </tr>
+
+
+                           
+                                            </tr>
 
                           </tbody>
                           {% endfor %}
@@ -438,9 +428,7 @@ Logout
                                   <th>District</th>
                                   <th>Item &amp; count</th>
                                   <th>Status</th>
-                                  <th>Comment</th>
-                                  <th>Comment Button</th>
-                                  
+                                  <th>Delete</th>
                                 </tr>
                               </thead>
                               {%for i in range(0,donors['Count'])%}
@@ -460,9 +448,11 @@ Logout
                                     {% else %}
                                     <td> <button style ="background-color: #275dbf7d;" class="btn" onclick="verify1({{donors['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
                                     {% endif %}
-                                    <td>{{ donors['Items'][i]['Comments'] }}</td>
-                                    <td><button style ="background-color: #00326f7d;" class="btn" onclick="comment1({{donors['Items'][i]['TimeIndex']}})">&nbsp;&nbsp;Add comment&nbsp;&nbsp;</button></td>
-                                    
+                                    {% if donors['Items'][i]['Status_Now'] == "Deleted" %}
+                              <td> <button style ="background-color: #2661f5cb;" class="btn" >&nbsp;&nbsp; Deleted &nbsp;&nbsp;</button></td>
+                              {% else %}
+                              <td> <button style ="background-color: #f52626cb;" class="btn" onclick="delete2({{donors['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Delete This Entry&nbsp;&nbsp;</button></td>
+                              {% endif %}
                             </tr>
                               
                               {% endfor %}

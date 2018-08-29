@@ -7,7 +7,9 @@ from functools import wraps
 import requests
 from flask import Flask ,render_template, redirect, url_for, session, request, logging
 
+
 app = Flask(__name__)
+
 
 def is_logged_in(f):	# Function for implementing security and redirection
 	@wraps(f)
@@ -18,10 +20,23 @@ def is_logged_in(f):	# Function for implementing security and redirection
 			return redirect(url_for('login'))
 	return wrap	# A wrap is a concept that is used to check for authorisation of a request
 
+def is_admin_logged_in(f):    # Function for implementing security and redirection
+    @wraps(f)
+    def wrap(*args,**kwargs):
+        if 'admin_logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            return redirect(url_for('home'))
+    return wrap # A wrap is a concept that is used to check for authorisation of a request
+
 
 @app.route('/', methods=['GET','POST']) #landing page
 def home():
-    return render_template("index.html")
+    try:
+        if session['logged_in'] == True:
+            return redirect(url_for('dashvolunteer'))
+    except:
+        return render_template("index.html")
 
 
 @app.route('/accept/<string:timeindex>',methods=['GET','POST'])
@@ -50,6 +65,117 @@ def accept1(timeindex):
     data = r.json()
     print(data)
     return redirect(url_for('dashvolunteer'))
+
+@app.route('/acceptadmin/<string:timeindex>',methods=['GET','POST'])
+@is_admin_logged_in 
+def acceptadmin(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('admin_dashboard'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/verification/request'
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':'Admin'}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    return redirect(url_for('admin_dashboard'))
+
+@app.route('/acceptadmin1/<string:timeindex>',methods=['GET','POST'])
+@is_admin_logged_in 
+def acceptadmin1(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('admin_dashboard'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/verification/donations'
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':'Admin'}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    return redirect(url_for('admin_dashboard'))
+
+
+@app.route('/comment/<string:timeindex>',methods=['GET','POST'])
+def comment(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('dashvolunteer'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/add-comment'
+    data = {'TimeIndex':timeindexlist[0],'Comments':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    return redirect(url_for('dashvolunteer'))
+
+@app.route('/comment1/<string:timeindex>',methods=['GET','POST'])
+def comment1(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('dashvolunteer'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/add-comment'
+    data = {'TimeIndex':timeindexlist[0],'Comments':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    print("I'm Here")
+    return redirect(url_for('dashvolunteer'))
+
+@app.route('/close1/<string:timeindex>',methods=['GET','POST'])
+def close1(timeindex):
+    print(timeindex)
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/close-request'
+    data = {'TimeIndex':timeindex}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    print("I'm Here1")
+    return redirect(url_for('dashvolunteer'))
+
+
+
+
+
+
+
+@app.route('/delete1/<string:timeindex>',methods=['GET','POST'])
+@is_admin_logged_in 
+def delete1(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('admin_dashboard'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/admin/deleterequest'
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    return redirect(url_for('admin_dashboard'))
+
+@app.route('/delete2/<string:timeindex>',methods=['GET','POST'])
+@is_admin_logged_in 
+def delete2(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('admin_dashboard'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/admin/deletedonor'
+    data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    return redirect(url_for('admin_dashboard'))
+
+
+
+
 
 
 
@@ -99,22 +225,82 @@ def login():
     return render_template("login.html")
 
 
+@app.route('/admin-login', methods=['GET','POST']) #landing page
+def admin_login():
+    if request.method =="POST":
+        username = request.form['username']
+        password = request.form['password']
+        url= "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/admin/login"
+        data = {'username':username, 'password': password}
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url, data=json.dumps(data), headers=headers)
+        data = r.json()
+        if data['Validation'] == "True":
+            # session['PhoneNumber']=data['PhoneNumber']
+            # session['TimeIndex']=data['TimeIndex']
+            # session['Email']=data['Email']
+            # session['District']=data['District']
+            # session['Name']=data['Name']
+            session['admin_logged_in'] = True
+            session['PhoneNumber']='123'
+            return redirect(url_for('admin_dashboard'))
+        elif data['Validation'] == "False":
+            message = "Invalid credentials"
+        else:
+            message = "Can't connect to server!"
+
+        return render_template("admin-login.html", message=message)
+    return render_template("admin-login.html")
+
+@app.route('/admin-dashboard', methods=['GET','POST'])
+@is_admin_logged_in 
+def admin_dashboard():
+    # data requests
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-unverified-request"
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    android = r.json()
+    
+    #data donors
+    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    donors = r.json() 
+    return render_template("admin-dashboard.html",android=android,donors=donors)
 
 
 @app.route('/donate', methods=['GET','POST']) #landing page
 def donate():
     if request.method =="POST":
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        items_from_web = r.json()
+        items_from_web = items_from_web['Items']
         name = request.form['name']
         phone = request.form['phone']
         address = request.form['address']
-        count = request.form['no']
-        item = request.form['item']
+        items_required = {}
+        
         district = request.form['district']
-        print(name,phone,address,count,item)
+        
         time1 = time.time()
         time1 = str(time1)
+        for each_item in items_from_web:
+            try:
+                items_required[each_item] = request.form[each_item]
+            except:
+                print("%s is not added" % each_item)
+        if len(items_required.keys()) == 0:
+            message = "Items cannot be empty Please select one"
+            url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+            headers = {'content-type': 'application/json'}
+            r=requests.get(url, headers=headers)
+            data = r.json()
+            count = len(data['Items'])
+            return render_template("donor.html",message = message,data = data,count = count)
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/registerdonor'
-        data = {'TimeIndex':time1 ,'Name':name,'PhoneNumber':phone,'Address':address,'Count':count,'Item':item,'Platform':"Web",'District':district}
+        data = {'TimeIndex':time1 ,'Name':name,'PhoneNumber':phone,'Items':items_required,'Address':address,'Platform':"Web",'District':district}
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
         data = r.json()
@@ -136,23 +322,40 @@ def donate():
 
 
 
-
-
 @app.route('/requesthelp', methods=['GET','POST']) #landing page
 def requesthelp():
     if request.method =="POST":
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        items_from_web = r.json()
+        items_from_web = items_from_web['Items']
+        
         name = request.form['name']
         phone = request.form['phone']
         address = request.form['address']
-        count = request.form['no']
-        item = request.form['item']
+        items_required = {}
         district = request.form['district']
-        print(name,phone,address,count,item)
+        for each_item in items_from_web:
+            try:
+                items_required[each_item] = request.form[each_item]
+            except:
+                print("%s is not added" % each_item)
+        if len(items_required.keys()) == 0:
+            message = "Items cannot be empty Please select one"
+            url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+            headers = {'content-type': 'application/json'}
+            r=requests.get(url, headers=headers)
+            data = r.json()
+            count = len(data['Items'])
+            return render_template("assistance.html",message = message,data = data,count = count)
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web'
-        data = {'Name':name,'PhoneNumber':phone,'Address':address,'Count':count,'Item':item,'Platform':"Web",'District':district}
+        data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district}
+        
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
         data = r.json()
+        
         message = "Successfully Registered"
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
         headers = {'content-type': 'application/json'}
@@ -168,31 +371,30 @@ def requesthelp():
     return render_template("assistance.html", data = data,count = count)
 
 @app.route('/dashboardvolunteer', methods=['GET','POST'])
-@is_logged_in 
+@is_logged_in
 def dashvolunteer():
     # data from web
-    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getrequest"
-    headers = {'content-type': 'application/json'}
-    r=requests.post(url, headers=headers)
-    data = r.json()
-    #data from app
-    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getall"
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-unverified-request"
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
     android = r.json()
+    #data from app
+#     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getall"
+#     headers = {'content-type': 'application/json'}
+#     r=requests.post(url, headers=headers)
+#     android = r.json()
     #data donors android
-    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getdonor'
-    headers = {'content-type': 'application/json'}
-    r=requests.post(url, headers=headers)
-    donors = r.json()
+#     url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getdonor'
+#     headers = {'content-type': 'application/json'}
+#     r=requests.post(url, headers=headers)
+#     donors = r.json()
     
     #data donors web
     url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
-    donorweb = r.json()  
-    print(donorweb)
-    return render_template("dashvolunteer.html",data=data,donorweb=donorweb,android=android,donors=donors)
+    donors = r.json() 
+    return render_template("dashvolunteer.html",android=android,donors=donors)
 
 @app.route('/logout')
 def logout():
@@ -208,12 +410,13 @@ def dash():
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
     data = r.json()
+    print(data)
     
     #data from app
-    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getall"
-    headers = {'content-type': 'application/json'}
-    r=requests.post(url, headers=headers)
-    android = r.json()
+#     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getall"
+#     headers = {'content-type': 'application/json'}
+#     r=requests.post(url, headers=headers)
+#     android = r.json()
     
     
 
@@ -226,14 +429,15 @@ def dash():
     
 
     #data donors web
-    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
-    headers = {'content-type': 'application/json'}
-    r=requests.post(url, headers=headers)
-    donorweb = r.json()
+#     url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
+#     headers = {'content-type': 'application/json'}
+#     r=requests.post(url, headers=headers)
+#     donorweb = r.json()
     
 
 
-    return render_template("active_req.html",data=data,donorweb=donorweb,android=android,donors=donors)
+#     return render_template("active_req.html",data=data,donorweb=donorweb,android=android,donors=donors)
+    return render_template("active_req.html",data=data,donors=donors)
 
 @app.context_processor
 def date_processor():
@@ -275,4 +479,3 @@ def volunteer():
 if __name__=='__main__':
     app.secret_key='secret123'
     app.run(threaded=True,host="0.0.0.0",port=80)
-    

@@ -288,8 +288,7 @@
                               <th>Phone</th>
                               <th>Address</th>
                               <th>District</th>
-                              <th>Item</th>
-                              <th>Count</th>
+                              <th>Item &amp; count</th>
                             </tr>
                           </thead>
                           {%for i in range(0,data['Count'])%}
@@ -300,25 +299,12 @@
                               <td>{{data['Items'][i]['PhoneNumber']}}</td>
                               <td>{{data['Items'][i]['Address']}}</td>
                               <td>{{data['Items'][i]['District']}}</td>
-                              <td>{{data['Items'][i]['Item']}}</td>
-                              <td>{{data['Items'][i]['Count']}}</td>
-                            </tr>
-                          </tbody>
-                          {% endfor %}
-                          {%for i in range(0,android['Count'])%}
-                          <tbody>
-                            <tr>
-                              <td>{{change_epoch(android['Items'][i]['TimeIndex'])}}</td>
-                              <td>{{android['Items'][i]['Name']}}</td>
-                              <td>{{android['Items'][i]['PhoneNumber']}}</td>
-                              <td>{{android['Items'][i]['Address']}}</td>
-                              <td>{{android['Items'][i]['District']}}</td>
-                              <td>{%for j in android['Items'][i]['Items'].keys()%}
-                                    {{ j }} &nbsp;
-                                          {% endfor %}</td>
-                                    <td>{%for j in android['Items'][i]['Items'].keys()%}
-                                          {{ android['Items'][i]['Items'][j] }} &nbsp;
-                                                {% endfor %}</td>
+                              <td>{%for j in data['Items'][i]['Items'].keys()%}
+                                {{ j }} &nbsp; {{ data['Items'][i]['Items'][j] }}<br/>
+                                      {% endfor %}</td>
+<!--                                 <td>{%for j in data['Items'][i]['Items'].keys()%}
+                                      {{ data['Items'][i]['Items'][j] }} &nbsp;
+                                            {% endfor %}</td> -->
                             </tr>
                           </tbody>
                           {% endfor %}
@@ -337,8 +323,7 @@
                                   <th>Phone</th>
                                   <th>Address</th>
                                   <th>District</th>
-                                  <th>Item</th>
-                                  <th>Count</th>
+                                  <th>Item &amp; count</th>
                                 </tr>
                               </thead>
                               {%for i in range(0,donors['Count'])%}
@@ -350,33 +335,19 @@
                                   <td>{{donors['Items'][i]['Taluk']}}</td>
                                   <td>{{donors['Items'][i]['District']}}</td>
                                   <td>{%for j in donors['Items'][i]['DonationItems'].keys()%}
-                                        {{ j }} &nbsp;
+                                        {{ j }} &nbsp; {{ donors['Items'][i]['DonationItems'][j] }}<br/>
                                         {% endfor %}
                                   </td>
-                                    <td>
+<!--                                     <td>
                                         {%for j in donors['Items'][i]['DonationItems'].keys()%}
                                               {{ donors['Items'][i]['DonationItems'][j] }} &nbsp;
                                        {% endfor %}
-                                    </td>
-
+                                    </td> -->
+                                 
                                 </tr>
                               </tbody>
                               {% endfor %}
-                              {%for i in range(0,donorweb['Count'])%}
-                              <tbody>
-                                <tr>
-                                  <td>{{change_epoch(donorweb['Items'][i]['TimeIndex'])}}</td>
-                                  <td>{{donorweb['Items'][i]['Name']}}</td>
-                                  <td>{{donorweb['Items'][i]['PhoneNumber']}}</td>
-                                  <td>{{donorweb['Items'][i]['Address']}}</td>
-                                  <td>{{donorweb['Items'][i]['District']}}</td>
-                                  <td>{{donorweb['Items'][i]['Item']}}</td>
-                                  <td>{{donorweb['Items'][i]['Count']}}</td>
-                                </tr>
-                              </tbody>
-                              {% endfor %}
-
-
+                              
                             </table>
                             </div>
             </div>
