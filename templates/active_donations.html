@@ -278,41 +278,44 @@
             <div class="container">
                     <br>
 
-                    <h1 style="color:#000; text-align:center;">Requests For Help</h1>
-                    <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th>Time</th>
-                              <th>Name</th>
-                              <th>Phone</th>
-                              <th>Address</th>
-                              <th>District</th>
-                              <th>Item &amp; count</th>
-                              <th>Status</th>
-                            </tr>
-                          </thead>
-                          {%for i in range(0,data['Count'])%}
-                          <tbody>
-                            <tr>
-                              <td>{{change_epoch(data['Items'][i]['TimeIndex'])}}</td>
-                              <td>{{data['Items'][i]['Name']}}</td>
-                              <td>{{data['Items'][i]['PhoneNumber']}}</td>
-                              <td>{{data['Items'][i]['Address']}}</td>
-                              <td>{{data['Items'][i]['District']}}</td>
-                              <td>{%for j in data['Items'][i]['Items'].keys()%}
-                                {{ j }} &nbsp; {{ data['Items'][i]['Items'][j] }}<br/>
-                                      {% endfor %}</td>
-<!--                                 <td>{%for j in data['Items'][i]['Items'].keys()%}
-                                      {{ data['Items'][i]['Items'][j] }} &nbsp;
-                                            {% endfor %}</td> -->
-                                <td>{{data['Items'][i]['Status_Now']}}</td>
-                            </tr>
-                          </tbody>
-                          {% endfor %}
+                        <h1 style="text-align:center;">Avaliable Donations</h1>
+                        <div class="table-responsive">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Time</th>
+                                  <th>Name</th>
+                                  <th>Phone</th>
+                                  <th>Address</th>
+                                  <th>District</th>
+                                  <th>Item &amp; count</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              {%for i in range(0,donors['Count'])%}
+                              <tbody>
+                                <tr>
+                                  <td>{{change_epoch(donors['Items'][i]['TimeIndex'])}}</td>
+                                  <td>{{donors['Items'][i]['Name']}}</td>
+                                  <td>{{donors['Items'][i]['PhoneNumber']}}</td>
+                                  <td>{{donors['Items'][i]['Taluk']}}</td>
+                                  <td>{{donors['Items'][i]['District']}}</td>
+                                  <td>{%for j in donors['Items'][i]['DonationItems'].keys()%}
+                                        {{ j }} &nbsp; {{ donors['Items'][i]['DonationItems'][j] }}<br/>
+                                        {% endfor %}
+                                  </td>
+<!--                                     <td>
+                                        {%for j in donors['Items'][i]['DonationItems'].keys()%}
+                                              {{ donors['Items'][i]['DonationItems'][j] }} &nbsp;
+                                       {% endfor %}
+                                    </td> -->
+                                   <td>{{donors['Items'][i]['Status_Now']}}</td>      
+                                </tr>
+                              </tbody>
+                              {% endfor %}
 
-                        </table>
-                        </div>
+                            </table>
+                            </div>
             </div>
         </section>
 
