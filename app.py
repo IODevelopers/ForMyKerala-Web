@@ -454,39 +454,26 @@ def logout():
 @app.route('/dashboard', methods=['GET','POST']) 
 def dash():
 
-    # data from web
+    # Getting all verified and closed requests
     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getrequest"
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
     data = r.json()
     print(data)
-    
-    #data from app
-#     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getall"
-#     headers = {'content-type': 'application/json'}
-#     r=requests.post(url, headers=headers)
-#     android = r.json()
-    
-    
 
-    #data donors android
-    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getdonor'
+    return render_template("active_req.html",data=data)
+
+@app.route('/donationdashboard', methods=['GET','POST']) 
+def donation_dashboard():
+
+    # Getting all verified donors
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/android/getdonor"
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
     donors = r.json()
-    
-    
+    print(donors)
 
-    #data donors web
-#     url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
-#     headers = {'content-type': 'application/json'}
-#     r=requests.post(url, headers=headers)
-#     donorweb = r.json()
-    
-
-
-#     return render_template("active_req.html",data=data,donorweb=donorweb,android=android,donors=donors)
-    return render_template("active_req.html",data=data,donors=donors)
+    return render_template("active_donations.html",donors=donors)
 
 @app.context_processor
 def date_processor():

@@ -63,21 +63,18 @@
                     </div>
                     <br>
                     <div class="CenteredPage__field">
-                            
-    
-                            <div class="" id="required-items">
-                                Items &nbsp;&nbsp;&nbsp;&nbsp;
-                                <select name="item" id="item-list">
-                                    {%for i in range(0,count)%}
+                      Items
+                      <div id="required-items">
+                            <select class="form-control form-control-sm" name="item" id="item-list">
+                                {%for i in range(0,count)%}
                                     <option value ="{{data['Items'][i]}}">{{data['Items'][i]}}</option>
-                                    {% endfor %}
-                                </select>
-                                <input type="button" name="button-add-item" value="Add Item" onclick="addItems()">
-    
-                                                        </div>
-                        </div><br>
-
-
+                                {% endfor %}
+                            </select>
+                            <input type="button" name="button-add-item" value="Add Item" onclick="addItems()">
+                        </div>
+                      </div>
+                      <br>
+                
                     <div class="CenteredPage__field">
                             Address
 
