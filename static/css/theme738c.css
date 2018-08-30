@@ -1435,12 +1435,12 @@ textarea {
 }
 
 a {
-  color: #79A4CA;
+  color: #fff;
   text-decoration: none;
 }
 
 a:hover, a:focus {
-  color: #467fb1;
+  color: #fff;
   text-decoration: underline;
 }
 
@@ -4613,7 +4613,6 @@ tbody.collapse.in {
   padding-left: 0;
   list-style: none;
 }
-
 .nav:before, .nav:after {
   content: " ";
   display: table;
@@ -4622,7 +4621,10 @@ tbody.collapse.in {
 .nav:after {
   clear: both;
 }
-
+.nav > a {
+  background-color: #fff;
+  color: #fff;
+}
 .nav > li {
   position: relative;
   display: block;
