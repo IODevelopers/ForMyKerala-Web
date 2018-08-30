@@ -26,7 +26,7 @@ The app was developed in order to help rehabilitate the refugees into proper hou
 
 # Web:
   [Pranoy Dev](https://github.com/devpranoy)<br>
-  [Chriss Martin](thechrissmartin@gmail.com)<br>
+  [Chriss Martin](https://github.com/chrissmartin)<br>
   [Philson Philip](https://github.com/philson-philip)
 
 

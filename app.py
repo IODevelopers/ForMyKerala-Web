@@ -9,8 +9,8 @@ from flask import Flask ,render_template, redirect, url_for, session, request, l
 
 
 app = Flask(__name__)
-
-
+from flask_sslify import SSLify
+sslify = SSLify(app)
 def is_logged_in(f):	# Function for implementing security and redirection
 	@wraps(f)
 	def wrap(*args,**kwargs):
@@ -34,37 +34,39 @@ def is_admin_logged_in(f):    # Function for implementing security and redirecti
 def home():
     try:
         if session['logged_in'] == True:
-            return redirect(url_for('dashvolunteer'))
+            return redirect(url_for('volunteer_home'))
     except:
         return render_template("index.html")
 
 
 @app.route('/accept/<string:timeindex>',methods=['GET','POST'])
+@is_logged_in
 def accept(timeindex):
     print(timeindex)
     timeindexlist = timeindex.split('&')
     if timeindexlist[1] == 'null':
-        return redirect(url_for('dashvolunteer'))
+        return redirect(url_for('volunteer_verifyrequests'))
     url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/verification/request'
     data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
     headers = {'content-type': 'application/json'}
     r=requests.post(url, data=json.dumps(data), headers=headers)
     data = r.json()
-    return redirect(url_for('dashvolunteer'))
+    return redirect(url_for('volunteer_verifyrequests'))
 
 @app.route('/accept1/<string:timeindex>',methods=['GET','POST'])
+@is_logged_in
 def accept1(timeindex):
     print(timeindex)
     timeindexlist = timeindex.split('&')
     if timeindexlist[1] == 'null':
-        return redirect(url_for('dashvolunteer'))
+        return redirect(url_for('volunteer_verifydonors'))
     url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/verification/donations'
     data = {'TimeIndex':timeindexlist[0],'PhoneNumber':timeindexlist[1]}
     headers = {'content-type': 'application/json'}
     r=requests.post(url, data=json.dumps(data), headers=headers)
     data = r.json()
     print(data)
-    return redirect(url_for('dashvolunteer'))
+    return redirect(url_for('volunteer_verifydonors'))
 
 @app.route('/acceptadmin/<string:timeindex>',methods=['GET','POST'])
 @is_admin_logged_in 
@@ -150,25 +152,27 @@ def admin_home():
 
 
 @app.route('/comment/<string:timeindex>',methods=['GET','POST'])
+@is_logged_in
 def comment(timeindex):
     print(timeindex)
     timeindexlist = timeindex.split('&')
     if timeindexlist[1] == 'null':
-        return redirect(url_for('dashvolunteer'))
+        return redirect(url_for('volunteer_verifyrequests'))
     url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/add-comment'
     data = {'TimeIndex':timeindexlist[0],'Comments':timeindexlist[1]}
     headers = {'content-type': 'application/json'}
     r=requests.post(url, data=json.dumps(data), headers=headers)
     data = r.json()
     print(data)
-    return redirect(url_for('dashvolunteer'))
+    return redirect(url_for('volunteer_verifyrequests'))
 
 @app.route('/comment1/<string:timeindex>',methods=['GET','POST'])
+@is_logged_in
 def comment1(timeindex):
     print(timeindex)
     timeindexlist = timeindex.split('&')
     if timeindexlist[1] == 'null':
-        return redirect(url_for('dashvolunteer'))
+        return redirect(url_for('volunteer_verifydonors'))
     url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/add-comment'
     data = {'TimeIndex':timeindexlist[0],'Comments':timeindexlist[1]}
     headers = {'content-type': 'application/json'}
@@ -176,9 +180,10 @@ def comment1(timeindex):
     data = r.json()
     print(data)
     print("I'm Here")
-    return redirect(url_for('dashvolunteer'))
+    return redirect(url_for('volunteer_verifydonors'))
 
 @app.route('/close1/<string:timeindex>',methods=['GET','POST'])
+@is_logged_in
 def close1(timeindex):
     print(timeindex)
     url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/close-request'
@@ -188,7 +193,7 @@ def close1(timeindex):
     data = r.json()
     print(data)
     print("I'm Here1")
-    return redirect(url_for('dashvolunteer'))
+    return redirect(url_for('volunteer_verifyrequests'))
 
 
 @app.route('/auth1/<string:timeindex>',methods=['GET','POST'])
@@ -248,15 +253,6 @@ def delete2(timeindex):
     return redirect(url_for('verifydonors'))
 
 
-
-
-
-
-
-
-
-
-
 @app.route('/feedback', methods=['GET','POST']) #landing page
 def feedback():
     if request.method =="POST":
@@ -294,9 +290,83 @@ def login():
             session['District']=data['District']
             session['Name']=data['Name']
             session['logged_in'] = True
-            return redirect(url_for('dashvolunteer'))
+            return redirect(url_for('volunteer_home'))
         return render_template("login.html", message=message)
     return render_template("login.html")
+
+@app.route('/volunteer-home', methods=['GET','POST']) #landing page volunteer 
+@is_logged_in
+def volunteer_home():
+    return render_template("volunteer-home.html")
+
+@app.route('/volunteer-request', methods=['GET','POST'])
+@is_logged_in 
+def volunteer_request():
+    if request.method =="POST":
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        items_from_web = r.json()
+        items_from_web = items_from_web['Items']
+        name = request.form['name']
+        phone = request.form['phone']
+        address = request.form['address']
+        comments = request.form['comments']
+        items_required = {}
+        district = request.form['district']
+        for each_item in items_from_web:
+            try:
+                items_required[each_item] = request.form[each_item]
+            except:
+                print("%s is not added" % each_item)
+        if len(items_required.keys()) == 0:
+            message = "Items cannot be empty Please select one"
+            url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+            headers = {'content-type': 'application/json'}
+            r=requests.get(url, headers=headers)
+            data = r.json()
+            count = len(data['Items'])
+            return render_template("volunteer-request.html",message = message,data = data,count = count)
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web'
+        data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district,
+        'Status_Now': 'Verified', 'Verified_by': session['PhoneNumber'], 'Comments': comments}
+        
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url, data=json.dumps(data), headers=headers)
+        data = r.json()
+        
+        message = "Request successfully added"
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        data = r.json()
+        count = len(data['Items'])
+        return render_template("volunteer-request.html",message = message,data = data,count = count)
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+    headers = {'content-type': 'application/json'}
+    r=requests.get(url, headers=headers)
+    data = r.json()
+    count = len(data['Items'])
+    return render_template("volunteer-request.html", data = data,count = count)
+
+@app.route('/volunteer-verifyrequests', methods=['GET','POST'])
+@is_logged_in 
+def volunteer_verifyrequests():
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-unverified-request"
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    android = r.json()
+    return render_template("volunteer-verifyrequests.html",android=android)
+
+@app.route('/volunteer-verifydonors', methods=['GET','POST'])
+@is_logged_in 
+def volunteer_verifydonors():
+    #data donors
+    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getdonor'
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    donors = r.json() 
+    return render_template("volunteer-verifydonors.html",donors=donors)
 
 
 @app.route('/admin-login', methods=['GET','POST']) #landing page
@@ -566,6 +636,9 @@ def volunteer():
         return render_template("registervolunteer.html",message = message)
     return render_template("registervolunteer.html")
 
+@app.route('/help', methods=['GET','POST']) 
+def website_help():
+    return render_template("help.html")
 
 if __name__=='__main__':
     app.secret_key='secret123'
