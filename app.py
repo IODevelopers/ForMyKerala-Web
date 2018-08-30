@@ -9,7 +9,6 @@ from flask import Flask ,render_template, redirect, url_for, session, request, l
 
 
 app = Flask(__name__)
-app.secret_key = "secret123"
 #from flask_sslify import SSLify
 #sslify = SSLify(app)
 def is_logged_in(f):	# Function for implementing security and redirection
@@ -295,10 +294,59 @@ def login():
         return render_template("login.html", message=message)
     return render_template("login.html")
 
-@app.route('/volunteer-home', methods=['GET','POST']) #landing page admin 
+@app.route('/volunteer-home', methods=['GET','POST']) #landing page volunteer 
 @is_logged_in
 def volunteer_home():
     return render_template("volunteer-home.html")
+
+@app.route('/volunteer-request', methods=['GET','POST'])
+@is_logged_in 
+def volunteer_request():
+    if request.method =="POST":
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        items_from_web = r.json()
+        items_from_web = items_from_web['Items']
+        name = request.form['name']
+        phone = request.form['phone']
+        address = request.form['address']
+        items_required = {}
+        district = request.form['district']
+        for each_item in items_from_web:
+            try:
+                items_required[each_item] = request.form[each_item]
+            except:
+                print("%s is not added" % each_item)
+        if len(items_required.keys()) == 0:
+            message = "Items cannot be empty Please select one"
+            url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+            headers = {'content-type': 'application/json'}
+            r=requests.get(url, headers=headers)
+            data = r.json()
+            count = len(data['Items'])
+            return render_template("volunteer-request.html",message = message,data = data,count = count)
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web'
+        data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district,
+        'Status_Now': 'Verified', 'Verified_by': session['PhoneNumber']}
+        
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url, data=json.dumps(data), headers=headers)
+        data = r.json()
+        
+        message = "Request successfully added"
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        data = r.json()
+        count = len(data['Items'])
+        return render_template("volunteer-request.html",message = message,data = data,count = count)
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+    headers = {'content-type': 'application/json'}
+    r=requests.get(url, headers=headers)
+    data = r.json()
+    count = len(data['Items'])
+    return render_template("volunteer-request.html", data = data,count = count)
 
 @app.route('/volunteer-verifyrequests', methods=['GET','POST'])
 @is_logged_in 
