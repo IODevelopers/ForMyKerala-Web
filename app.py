@@ -311,6 +311,7 @@ def volunteer_request():
         name = request.form['name']
         phone = request.form['phone']
         address = request.form['address']
+        comments = request.form['comments']
         items_required = {}
         district = request.form['district']
         for each_item in items_from_web:
@@ -328,7 +329,7 @@ def volunteer_request():
             return render_template("volunteer-request.html",message = message,data = data,count = count)
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web'
         data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district,
-        'Status_Now': 'Verified', 'Verified_by': session['PhoneNumber']}
+        'Status_Now': 'Verified', 'Verified_by': session['PhoneNumber'], 'Comments': comments}
         
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
