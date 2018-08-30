@@ -254,6 +254,14 @@
                     E = e(4)
             }, {}]
         }, {}, ["loader"]);
+
+
+        function alerter() {
+                    alert("Download the app to Donate");
+                    window.location="https://play.google.com/store/apps/details?id=in.co.iodev.formykerala";
+                }
+
+
     </script>
     <title>For My Kerala</title>
 
@@ -286,10 +294,11 @@
                               <th>Time</th>
                               <th>Name</th>
                               <th>Phone</th>
-                            
+                                
                               <th>District</th>
                               <th>Item &amp; count</th>
                               <th>Status</th>
+                              <th> Donate </th>
                             </tr>
                           </thead>
                           {%for i in range(0,data['Count'])%}
@@ -307,6 +316,7 @@
                                       {{ data['Items'][i]['Items'][j] }} &nbsp;
                                             {% endfor %}</td> -->
                                 <td>{{data['Items'][i]['Status_Now']}}</td>
+                                 <td> <button style ="background-color: #157159; color: #fff;" class="btn" onclick="alerter()">&nbsp;&nbsp; Donate &nbsp;&nbsp;</button></td>   
                             </tr>
                           </tbody>
                           {% endfor %}
