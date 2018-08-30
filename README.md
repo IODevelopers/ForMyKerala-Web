@@ -16,8 +16,8 @@ The app was developed in order to help rehabilitate the refugees into proper hou
   
 # Backend Development:
   [Martin Siby](https://github.com/martin-raven)<br>
-  [Rajat Jaic Mendus](https://github.com/rjmendus)
-  
+  [Rajat Jaic Mendus](https://github.com/rjmendus)<br>
+  [Pranoy Dev](https://github.com/devpranoy)
   
 # Designs:
   [Philson Philip](https://github.com/philson-philip)<br>

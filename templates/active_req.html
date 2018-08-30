@@ -286,7 +286,7 @@
                               <th>Time</th>
                               <th>Name</th>
                               <th>Phone</th>
-                              <th>Address</th>
+                            
                               <th>District</th>
                               <th>Item &amp; count</th>
                               <th>Status</th>
@@ -298,7 +298,7 @@
                               <td>{{change_epoch(data['Items'][i]['TimeIndex'])}}</td>
                               <td>{{data['Items'][i]['Name']}}</td>
                               <td>{{data['Items'][i]['PhoneNumber']}}</td>
-                              <td>{{data['Items'][i]['Address']}}</td>
+                             
                               <td>{{data['Items'][i]['District']}}</td>
                               <td>{%for j in data['Items'][i]['Items'].keys()%}
                                 {{ j }} &nbsp; {{ data['Items'][i]['Items'][j] }}<br/>
