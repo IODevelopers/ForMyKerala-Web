@@ -306,7 +306,11 @@
 <!--                                 <td>{%for j in data['Items'][i]['Items'].keys()%}
                                       {{ data['Items'][i]['Items'][j] }} &nbsp;
                                             {% endfor %}</td> -->
+                                {% if data['Items'][i]['Status_Now'] == "Verified" %}
+                                <td>Verified by Volunteer</td>
+                                {% else %}
                                 <td>{{data['Items'][i]['Status_Now']}}</td>
+                                {% endif %}
                             </tr>
                           </tbody>
                           {% endfor %}
