@@ -576,7 +576,7 @@ def logout():
 	return redirect(url_for('home'))
 
 
-@app.route('/dashboard', methods=['GET','POST']) 
+@app.route('/activerequests', methods=['GET','POST']) 
 def dash():
 
     # Getting all verified and closed requests
