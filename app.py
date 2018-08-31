@@ -588,6 +588,19 @@ def dash():
 
     return render_template("active_req.html",data=data)
 
+@app.route('/loadmorerequests/<string:timeindex>', methods=['GET','POST']) 
+def loadmorerequests(timeindex):
+
+    # Getting all verified and closed requests more
+    data = {"LastEvaluatedKey" : { "TimeIndex": timeindex } }
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getrequest"
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data),headers=headers)
+    data = r.json()
+    print(data)
+
+    return render_template("active_req.html",data=data)
+
 @app.route('/donationdashboard', methods=['GET','POST']) 
 def donation_dashboard():
 

@@ -9,6 +9,11 @@
                     alert("Download the app to Donate");
                     window.location="https://formykerala.in/#download";
                 }
+      function viewmore(LastEvaluatedKey){
+        window.location="/loadmorerequests/"+LastEvaluatedKey;
+
+      }
+
 	</script>
   </head>
   <body>
@@ -22,7 +27,7 @@
     <br>
     <div id="listing">
       <div id="sorter">
-	<span class="request"><span class="count">{{data['Count']}}</span> Active Requests </span>
+	<span class="request"><span class="count">100+</span> Active Requests </span>
 	
       </div>
       {%for i in range(0,data['Count'])%}
@@ -70,10 +75,14 @@
 	  {%for j in data['Items'][i]['Items'].keys()%}
       %0A  &nbsp;&nbsp;&nbsp;&nbsp; {{ j }} &nbsp; {{ data['Items'][i]['Items'][j] }} 
       {% endfor %}
-	 %0A%0A PhoneNo: {{data['Items'][i]['PhoneNumber']}} %0A Goto formykerala.in to help them out" data-action="share/whatsapp/share" style="text-decoration: none;"><button class="share-button">Share</button></a>
+	  %0A Goto formykerala.in to help them out" data-action="share/whatsapp/share" style="text-decoration: none;"><button class="share-button">Share</button></a>
 	</div>
       </div>
       {% endfor %}
+      <br>
+      <center><button class = "btn" onclick="viewmore({{data['LastEvaluatedKey']['TimeIndex']}})"> View More </button></center>
+      <br>
+      <br>
     </div>
   </body>
 </html>
