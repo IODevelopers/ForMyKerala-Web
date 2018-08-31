@@ -35,7 +35,7 @@
 	<div  class="location-and-number">
 	  <div class="location">
 	    <p class="label">Requested From</p>
-	    <p class="value">{{data['Items'][i]['Name']}} at {{data['Items'][i]['District']}}</p>
+	    <p class="value">{{data['Items'][i]['Name']}} </p>
 	  </div>
 	  <div class="phone-number">
 	    <p class="label">Date & Time</p>
@@ -44,9 +44,9 @@
 	  </div>
 	
 	  <div class="phone-number" > 
-<!-- 	    <p class="label">&nbsp;&nbsp;&nbsp;&nbsp;Phone Number</p>
-	    <p  class="value">&nbsp;&nbsp;&nbsp;<a href="tel:{{data['Items'][i]['PhoneNumber']}}" style="text-decoration: none; color:#157159;">{{data['Items'][i]['PhoneNumber']}}</a> -->
-<!-- 	    </p> -->
+	    <p class="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;District</p>
+	    <p  class="value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  style="text-decoration: none; color:#157159;">{{data['Items'][i]['District']}}</a> 
+    </p>
 	  </div>
 	</div>
 	<div class="quantity-and-notes">
@@ -80,7 +80,16 @@
       </div>
       {% endfor %}
       <br>
-      <center><button class = "btn" onclick="viewmore({{data['LastEvaluatedKey']['TimeIndex']}})"> View More </button></center>
+      
+      {% if data['Count'] >= 23%}
+      
+      <center>
+        <div class="buttons">
+        <button  class="accept-request" onclick="viewmore({{data['LastEvaluatedKey']['TimeIndex']}})"> View More </button></center>
+      </div>
+        {% else %}
+      <center><h2>No more Requests</h2></center>
+      {% endif %}
       <br>
       <br>
     </div>
