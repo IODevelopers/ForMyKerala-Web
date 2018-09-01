@@ -10,7 +10,7 @@
                     window.location="https://formykerala.in/#download";
                 }
       function viewmore(LastEvaluatedKey){
-        window.location="/loadmorerequests/"+LastEvaluatedKey;
+        window.location="/loadmorerequestsvolunteer/"+LastEvaluatedKey;
 
       }
     </script>
@@ -54,7 +54,7 @@
     	<br>
       <h2>For My Kerala - Volunteer Dashboard</h2>
      
-     <h2> Full functionality of this web page is available in Mobile Phone browser </h2>
+     <h2> Volunteer Dashboard </h2>
     </div>
     <br>
     <br>
@@ -117,9 +117,13 @@
           </div>
 	</div>
 	<div class="buttons">
-	  <button class="accept-request" onclick="">Verify</button>
-      <button class="share-button" style="background-color: #153a71;color:white;" >Comment</button>&nbsp;&nbsp;&nbsp;
-      <button class="share-button" style="background-color: #711515;color:white;" onclick="">Close</button>
+	  <button class="accept-request" onclick="verify({{android['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">Verify</button>
+      <button class="share-button" style="background-color: #153a71;color:white;" onclick="comment({{android['Items'][i]['TimeIndex']}})" >Comment</button>&nbsp;&nbsp;&nbsp;
+      {% if android['Items'][i]['Status_Now'] == "Closed" %}
+      <button class="share-button" style="background-color: white;color:#711515;" >Closed</button>
+      {% else %}
+      <button class="share-button" style="background-color: #711515;color:white;" onclick="close1({{android['Items'][i]['TimeIndex']}})">Close</button>
+      {% endif %}
 	</div>
       </div>
       {% endfor %}
