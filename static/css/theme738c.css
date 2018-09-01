@@ -8802,13 +8802,21 @@ a.homepage__producthunt {
   font: inherit;
   outline: none;
   height: 40px;
-  color: #2e9dd4;
+  color: #11a25a;
   border: 0;
   border-bottom: 1px solid #ddd;
 }
-
+.item-btn{
+  background-color: #11a25a;
+  color: #fff !important;
+  border-radius: 25px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75% !important;
+}
 .CenteredPage__field input:focus, .CenteredPage__field textarea:focus {
-  border-bottom-color: #2e9dd4;
+  border-bottom-color: #11a25a ;
 }
 
 .CenteredPage__field .btn-raised {
