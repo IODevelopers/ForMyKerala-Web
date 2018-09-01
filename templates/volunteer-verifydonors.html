@@ -391,7 +391,7 @@ Logout
                                   <th>Phone</th>
                                   <th>Address</th>
                                   <th>District</th>
-                                  <th>Item &amp; count</th>
+                                  <!-- <th>Item &amp; count</th> -->
                                   <th>Status</th>
                                   <th>Comment</th>
                                   <th>Comment Button</th>
@@ -406,10 +406,6 @@ Logout
                                   <td>{{donors['Items'][i]['PhoneNumber']}}</td>
                                   <td>{{donors['Items'][i]['Taluk']}}</td>
                                   <td>{{donors['Items'][i]['District']}}</td>
-                                  <td>{%for j in donors['Items'][i]['DonationItems'].keys()%}
-                                        {{ j }} &nbsp; {{ donors['Items'][i]['DonationItems'][j] }} &nbsp;<br/>
-                                        {% endfor %}
-                                  </td>
                                     {% if donors['Items'][i]['Status_Now'] == "Verified" %}
                                     <td> <button style ="background-color: #27bf317d;" class="btn">&nbsp;&nbsp;Verified by  {{donors['Items'][i]['Verified_by']}}   &nbsp;&nbsp;</button></td>
                                     {% else %}

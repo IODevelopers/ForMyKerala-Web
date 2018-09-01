@@ -286,7 +286,7 @@
                                   <th>Time</th>
                                   <th>Name</th>
                                   <th>District</th>
-                                  <th>Item &amp; count</th>
+                                  <!-- <th>Item &amp; count</th> -->
                                   <th>Status</th>
                                 </tr>
                               </thead>
@@ -296,15 +296,6 @@
                                   <td>{{change_epoch(donors['Items'][i]['TimeIndex'])}}</td>
                                   <td>{{donors['Items'][i]['Name']}}</td>
                                   <td>{{donors['Items'][i]['District']}}</td>
-                                  <td>{%for j in donors['Items'][i]['DonationItems'].keys()%}
-                                        {{ j }} &nbsp; {{ donors['Items'][i]['DonationItems'][j] }}<br/>
-                                        {% endfor %}
-                                  </td>
-<!--                                     <td>
-                                        {%for j in donors['Items'][i]['DonationItems'].keys()%}
-                                              {{ donors['Items'][i]['DonationItems'][j] }} &nbsp;
-                                       {% endfor %}
-                                    </td> -->
                                    <td>{{donors['Items'][i]['Status_Now']}}</td>      
                                 </tr>
                               </tbody>
