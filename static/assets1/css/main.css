@@ -4177,7 +4177,26 @@ input, select, textarea {
 			}
 
 		}
+/* Partner */
 
+	#partner {
+		background-color: #f8f9fa;
+		color: #999999;
+		padding: 2em 1em 0.5em 1em ;
+		color: #b0b0b0;
+		text-align: center;
+	}
+
+	#partner h2 {
+		color: black;
+	}
+
+
+/* AJCE LOGO */
+
+	#ajce-logo {
+		align-self: center;
+	}
 /* Footer */
 
 	#footer {
