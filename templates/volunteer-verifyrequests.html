@@ -78,7 +78,7 @@
 	  </div>
 	
 	  <div class="phone-number district" > 
-	    <p class="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;District</p>
+	    <p class="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; District</p>
 	    <p  class="value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  style="text-decoration: none; color:#157159;">{{android['Items'][i]['District']}}</a> 
     </p>
       </div>
@@ -89,6 +89,11 @@
           </div>
 	</div>
 	<div class="quantity-and-notes">
+            <div class="quantity">
+                    <p class="label">Address</p>
+                    <p class="value">{{android['Items'][i]['Address']}}
+                    </p>
+                  </div><br><br>
 	  <div class="quantity">
 	    <p class="label">Quantity</p>
 	    <p class="value">{%for j in android['Items'][i]['Items'].keys()%}
