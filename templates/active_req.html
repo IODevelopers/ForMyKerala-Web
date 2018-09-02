@@ -63,7 +63,7 @@
 	      {% if data['Items'][i]['Status_Now'] == "Verified" %}
                                 <p class="value">Verified by Volunteer</p>
                                 {% else %}
-                               <p class="value">Not Verified</p>
+                               <p class="value">{{data['Items'][i]['Status_Now']}}</p>
 			{% endif %}
 	    
 
