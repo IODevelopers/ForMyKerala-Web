@@ -578,6 +578,8 @@ def logout():
 
 @app.route('/activerequests', methods=['GET','POST']) 
 def dash():
+    if request.method=='POST':
+        print(request.form['district'])
 
     # Getting all verified and closed requests
     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getrequest"
