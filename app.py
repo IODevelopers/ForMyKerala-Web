@@ -579,14 +579,20 @@ def logout():
 @app.route('/activerequests', methods=['GET','POST']) 
 def dash():
     if request.method=='POST':
-        print(request.form['district'])
-
+        district = request.form['district']
+        data={"District":district}
+        url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/search/district"
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url,data=json.dumps(data), headers=headers) 
+        data = r.json()
+        print(data)
+        return render_template("active_req.html",data=data)
     # Getting all verified and closed requests
     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/getrequest"
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
     data = r.json()
-    print(data)
+    
 
     return render_template("active_req.html",data=data)
 
