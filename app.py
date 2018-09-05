@@ -138,6 +138,67 @@ def closeadmin1(timeindex):
     print("I'm Here1")
     return redirect(url_for('verifyrequests'))
 
+@app.route('/edit/<string:timeindex>',methods=['GET','POST'])
+def edit(timeindex):
+    if request.method =="POST":
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        items_from_web = r.json()
+        items_from_web = items_from_web['Items']
+        name = request.form['name']
+        phone = request.form['phone']
+        address = request.form['address']
+        items_required = {}
+        district = request.form['district']
+        for each_item in items_from_web:
+            try:
+                items_required[each_item] = request.form[each_item]
+            except:
+                print("%s is not added" % each_item)
+        url = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/admin/edit-request"
+        items_to_be_deleted=[]
+        for item in items_required.keys():
+            if items_required[item] == '0':
+                items_to_be_deleted.append(item)
+        print(items_to_be_deleted)
+        for item in items_to_be_deleted:
+            items_required.pop(item,None)
+        
+        data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district,'TimeIndex':timeindex}
+        print(data)
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url, data=json.dumps(data), headers=headers)
+        data = r.json()
+        
+        
+        return redirect(url_for('verifyrequests'))
+
+
+
+
+
+
+
+
+
+
+
+    print(timeindex)
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/web/get-specific-request'
+    data = {'TimeIndex':timeindex}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    print(data)
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+    headers = {'content-type': 'application/json'}
+    r=requests.get(url, headers=headers)
+    data1 = r.json()
+    count = len(data1['Items'])
+    return render_template("edit.html",data=data, data1=data1, count=count)
+    
+
 @app.route('/admin-home', methods=['GET','POST']) #landing page admin 
 @is_admin_logged_in 
 def admin_home():
@@ -404,6 +465,8 @@ def verifyrequests():
     r=requests.post(url, headers=headers)
     android = r.json()
     return render_template("verifyrequests.html",android=android)
+
+
 
 @app.route('/verifydonors', methods=['GET','POST'])
 @is_admin_logged_in 

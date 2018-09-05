@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <title> For My Kerala</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.html">
+    <link rel="mask-icon" href="safari-pinned-tab.html" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" name="description" content="Easily create forms as beautiful as you.">
+    <script>function addItems(){var e=document.getElementById("item-list"),t=document.getElementById("required-items"),d=e.options[e.selectedIndex].value;if(document.getElementsByName(d).length<=0){var n=document.createTextNode(d);t.appendChild(n);var m=document.createElement("input");m.setAttribute("type","number"),m.setAttribute("name",d),m.setAttribute("placeholder","Number of Items"),m.required=!0,t.appendChild(m)}else alert("Item already added")}
+
+
+</script>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/theme738c.css?v=1.0">
+  </head>
+  <body class="page-register">
+        <div class="invite">
+        <div class="invite__overlay"></div>
+        <div class="invitepage__pageinner">
+                        <div>
+            <a href="/"><img src="../static/images/logo-v2/logo-sq.png" width="120px" height="120px"></a>
+
+
+            <h1 style="margin: 15px 0; margin-top: 30px;">
+
+                                           Request for help
+
+            </h1>
+                        <h2 style="margin: 0; margin-bottom: 25px;">Make a request for any items that are needed by flood affected victms</h2>
+
+                            </div>
+                        <div style="max-width: 350px;  margin: 0 auto;">
+                                {{message}}
+                <div class="invite__form">
+
+
+
+                <form class="form-horizontal" method="POST">
+
+
+                    <div class="CenteredPage__field">
+                        Name
+
+                        <div class="">
+                            <input id="name" type="text"  name="name" value="{{data['Name']}}" required>
+
+                                                    </div>
+                    </div>
+
+
+
+                     <div class="CenteredPage__field">
+                        Phone No.
+
+                        <div class="">
+                            <input type="text"  name="phone"  id="phone" value="{{data['PhoneNumber']}}" required>
+
+                                                    </div>
+                    </div>
+                    <br>
+                    <div class="CenteredPage__field">
+                      Items
+                      <div id="required-items">
+                            <select class="form-control form-control-sm" name="item" id="item-list">
+                                {%for i in range(0,count)%}
+                                    <option value ="{{data1['Items'][i]}}">{{data1['Items'][i]}}</option>
+                                {% endfor %}
+                            </select>
+                            <input class="item-btn" type="button" name="button-add-item" value="Add Item" onclick="addItems()">
+                            {% for i in data['Items'].keys()%}
+                            {{i}}
+                            <input type="number" name="{{i}}" placeholder="Number of Items" value="{{data['Items'][i]}}" required="">
+                            {% endfor %}
+                        </div>
+                      </div>
+                      <br>
+                
+                    <div class="CenteredPage__field">
+                            Address
+
+                            <div class="">
+                                <input id="name" type="text"  name="address" value="{{data['Address']}}" required>
+
+
+                                                        </div>
+                        </div>
+                        <div class="CenteredPage__field">
+                            District
+
+                            <div class="">
+                                <input id="name" type="text"  name="district" value="{{data['District']}}" required>
+
+
+                                                        </div>
+                        </div>
+
+
+                    <div class="CenteredPage__field">
+
+                            <button  type="submit" class="btn-raised btn-primary">
+                                Confirm Edit
+                            </button>
+                    </div>
+
+                </form>
+              </div>
+
+            </div>
+    </div>
+</div>
+</html>
