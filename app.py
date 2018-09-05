@@ -410,6 +410,77 @@ def volunteer_request():
     count = len(data['Items'])
     return render_template("volunteer-request.html", data = data,count = count)
 
+@app.route('/registervolfilled/<string:timeindex>', methods=['GET','POST'])
+def registervolfilled(timeindex):
+    if request.method =="POST":
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        items_from_web = r.json()
+        items_from_web = items_from_web['Items']
+        name = request.form['name']
+        phone = request.form['phone']
+        address = request.form['address']
+        comments = request.form['comments']
+        items_required = {}
+        district = request.form['district']
+        for each_item in items_from_web:
+            try:
+                items_required[each_item] = request.form[each_item]
+            except:
+                print("%s is not added" % each_item)
+        if len(items_required.keys()) == 0:
+            message = "Items cannot be empty Please select one"
+            url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+            headers = {'content-type': 'application/json'}
+            r=requests.get(url, headers=headers)
+            data = r.json()
+            count = len(data['Items'])
+            return render_template("volunteer-request1.html",message = message,data = data,count = count)
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web'
+        data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district,
+        'Status_Now': 'Verified', 'Verified_by': session['PhoneNumber'], 'Comments': comments}
+        
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url, data=json.dumps(data), headers=headers)
+        data = r.json()
+        
+        message = "Request successfully added"
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+        headers = {'content-type': 'application/json'}
+        r=requests.get(url, headers=headers)
+        data = r.json()
+        count = len(data['Items'])
+        return render_template("volunteer-request1.html",message = message,data = data,count = count)
+    timeindexlist = timeindex.split('&')
+    print(timeindexlist)
+    print(timeindex)
+    name = timeindexlist[0]
+    phone = timeindexlist[1]
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
+    headers = {'content-type': 'application/json'}
+    r=requests.get(url, headers=headers)
+    data = r.json()
+    count = len(data['Items'])
+    return render_template("volunteer-request1.html", data = data,count = count,name=name,phone=phone)
+
+
+
+
+
+
+
+
+@app.route('/volunteer-feedback', methods=['GET','POST'])
+@is_logged_in 
+def volunteer_feedback():
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/volunteer/get-feedback"
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    android = r.json()
+    return render_template("volunteer-feedback.html",donors=android)
+
+
 @app.route('/volunteer-verifyrequests', methods=['GET','POST'])
 @is_logged_in 
 def volunteer_verifyrequests():

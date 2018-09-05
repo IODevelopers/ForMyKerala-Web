@@ -384,68 +384,50 @@ Logout
             <div class="container">
                     <br>
 
-                    <h1 style="color:#fff; text-align:center;">Requests For Help</h1>
-                    <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th>Time</th>
-                              <th>Name</th>
-                              <th>Phone</th>
-                              <th>Address</th>
-                              <th>District</th>
-                              <th>Item &amp; count</th>
-                              <th>Status</th>
-                              <th>Delete</th>
-                              <th>Comment</th>
+                        <h1 style="color:#fff; text-align:center;">Avaliable Donors</h1>
+                        <div class="table-responsive">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Time</th>
+                                  <th>Name</th>
+                                  <th>Phone</th>
+                                  <th>Address</th>
+                                  <th>District</th>
+                                  <!-- <th>Item &amp; count</th> -->
+                                  <th>Status</th>
+                                  <th>Delete</th>
+                                  <th>Comment</th>
                               <th>Comment Button</th>
-                              <th>Close the entry</th>
-                            </tr>
-                          </thead>
-                 
-                          {%for i in range(0,android['Count'])%}
-                          <tbody>
-                            <tr>
-                              <td>{{change_epoch(android['Items'][i]['TimeIndex'])}}</td>
-                              <td>{{android['Items'][i]['Name']}}</td>
-                              <td>{{android['Items'][i]['PhoneNumber']}}</td>
-                              <td>{{android['Items'][i]['Address']}}</td>
-                              <td>{{android['Items'][i]['District']}}</td>
-                              <td>{%for j in android['Items'][i]['Items'].keys()%}
-                                    {{ j }} &nbsp; {{ android['Items'][i]['Items'][j] }}<br/>
-                                          {% endfor %}</td>
-                            {% if android['Items'][i]['Status_Now'] == "Verified" %}
-                              <td> <button style ="background-color: #27bf317d;" class="btn">&nbsp;&nbsp;Verified by  {{android['Items'][i]['Verified_by']}} &nbsp;&nbsp;</button></td>
-                              {% else %}
-                              <td> <button style ="background-color: #275dbf7d;" class="btn" onclick="verify({{android['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
-                              {% endif %}
+                                </tr>
+                              </thead>
+                              {%for i in range(0,donors['Count'])%}
 
-                              {% if android['Items'][i]['Status_Now'] == "Deleted" %}
+                                <tr>
+                                  <td>{{change_epoch(donors['Items'][i]['TimeIndex'])}}</td>
+                                  <td>{{donors['Items'][i]['Name']}}</td>
+                                  <td>{{donors['Items'][i]['PhoneNumber']}}</td>
+                                  <td>{{donors['Items'][i]['Taluk']}}</td>
+                                  <td>{{donors['Items'][i]['District']}}</td>
+                                    {% if donors['Items'][i]['Status_Now'] == "Verified" %}
+                                    <td> <button style ="background-color: #27bf317d;" class="btn">&nbsp;&nbsp;Verified by  {{donors['Items'][i]['Verified_by']}}   &nbsp;&nbsp;</button></td>
+                                    {% else %}
+                                    <td> <button style ="background-color: #275dbf7d;" class="btn" onclick="verify1({{donors['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Verify This Entry&nbsp;&nbsp;</button></td>
+                                    {% endif %}
+                                    {% if donors['Items'][i]['Status_Now'] == "Deleted" %}
                               <td> <button style ="background-color: #2661f5cb;" class="btn" >&nbsp;&nbsp; Deleted &nbsp;&nbsp;</button></td>
                               {% else %}
-                              <td> <button style ="background-color: #f52626cb;" class="btn" onclick="delete1({{android['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Delete This Entry&nbsp;&nbsp;</button></td>
+                              <td> <button style ="background-color: #f52626cb;" class="btn" onclick="delete2({{donors['Items'][i]['TimeIndex']}},{{session['PhoneNumber']}})">&nbsp;&nbsp;Delete This Entry&nbsp;&nbsp;</button></td>
                               {% endif %}
-
-                              <td>{{ android['Items'][i]['Comments'] }}</td>
-                              <td><button style ="background-color: #00326f7d;" class="btn" onclick="comment({{android['Items'][i]['TimeIndex']}})">&nbsp;&nbsp;Add comment&nbsp;&nbsp;</button></td>
-                              {% if android['Items'][i]['Status_Now'] == "Closed" %}
-                              <td><button style ="background-color: #ff0000db;" class="btn" >&nbsp;&nbsp;This Entry is Closed &nbsp;&nbsp;</button></td>
-                              {% else %}
-                              <td><button style ="background-color: #ac0b0b7d;" class="btn" onclick="close1({{android['Items'][i]['TimeIndex']}})">&nbsp;&nbsp;Close this entry &nbsp;&nbsp;</button></td>
-                              {% endif %}
+                              <td>{{ donors['Items'][i]['Comments'] }}</td>
+                              <td><button style ="background-color: #00326f7d;" class="btn" onclick="comment1({{donors['Items'][i]['TimeIndex']}})">&nbsp;&nbsp;Add comment&nbsp;&nbsp;</button></td>
+                            </tr>
+                              
+                              {% endfor %}
 
 
-                           
-                                            </tr>
-
-                          </tbody>
-                          {% endfor %}
-
-                        </table>
-                        </div>
-
-
-                        
+                            </table>
+                            </div>
             </div>
         </section>
 
