@@ -797,6 +797,19 @@ def loadmorerequests(timeindex):
 
     return render_template("active_req.html",data=data)
 
+@app.route('/loadmorerequestsfulfilled/<string:timeindex>', methods=['GET','POST']) 
+def loadmorerequestsfulfilled(timeindex):
+
+    # Getting all verified and closed requests more
+    data = {"LastEvaluatedKey" : { "TimeIndex": timeindex } }
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-closed-requests"
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data),headers=headers)
+    data = r.json()
+    print(data)
+
+    return render_template("fulfilledrequests.html",data=data)
+
 @app.route('/loadmorerequestsvolunteer/<string:timeindex>', methods=['GET','POST']) 
 def loadmorerequestsvolunteer(timeindex):
 
@@ -829,6 +842,25 @@ def date_processor():
        
         return datetime.fromtimestamp(ts).strftime('%d/%m %I:%M %p')
     return dict(change_epoch=change_epoch)
+
+@app.route('/fulfilledrequests', methods=['GET','POST'])
+def fulfilled_requests():
+    if request.method=='POST':
+        district = request.form['district']
+        data={"District":district}
+        url="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/search/closed-district"
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url,data=json.dumps(data), headers=headers) 
+        data = r.json()
+        print(data)
+        return render_template("fulfilledrequests.html",data=data)
+    # Getting all closed requests
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-closed-requests"
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    data = r.json()
+    
+    return render_template("fulfilledrequests.html",data=data)
 
 
 @app.route('/disclaimer')
