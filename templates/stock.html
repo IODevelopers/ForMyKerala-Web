@@ -31,6 +31,7 @@
           color: "#157159",
           dataPoints: [
 
+
           {%for items in data['Items'].keys()%}
             { y: {{data['Items'][items]}}, label: "{{items}}" },
             
@@ -60,18 +61,23 @@
     <br>
     <br>
     <br>
+<<<<<<< HEAD
     <div id="chartContainer" style="height: 400px; width: 100%;"></div>
     <script src="../static/assets1/js/chart.js"></script>
       
+=======
+      <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+      <script src="../static/assets1/js/chart.js"></script>
+>>>>>>> d087873bb17f7a84506da4c0f6b7e5cd68a13e9b
       <br><br>
       <div class="container">
           <table class="highlight centered">
               <thead>
                 <tr>
-                  <th>Item</th>
-                    <th>Nos.</th>
+                    <th><b>Item</b></th>
+                    <th><b>Quantity</b></th>
                     
-                    <th>New Value</th>
+                    <th><b>New Value</b></th>
                 </tr>
               </thead>
       
@@ -90,7 +96,10 @@
               </tbody>
             </table>
       </div>
+<<<<<<< HEAD
      
+=======
+>>>>>>> d087873bb17f7a84506da4c0f6b7e5cd68a13e9b
     <br><br><br>
   </body>
 </html>
