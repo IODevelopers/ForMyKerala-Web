@@ -69,10 +69,12 @@
 	  </div>
 	
 	  <div class="phone-number district" > 
-	    <p class="label">District</p>
-	    <p  class="value"><a  style="text-decoration: none; color:#157159;">{{data['Items'][i]['District']}}</a> 
-    </p>
+    <p class="label">Donated by</p>
+        {% for donor in data['Items'][i]['Donated_By'] %}
+                                <p style="color:black;" class="value">{{donor}}</p>
+      {% endfor %}
 	  </div>
+
 	</div>
 	<div class="quantity-and-notes">
 	  <div class="quantity">
@@ -83,17 +85,10 @@
         </p>
 	  </div>
 	  <div class="notes">
-	    <!-- <p class="label">Status</p>
-	      {% if data['Items'][i]['Status_Now'] == "Closed" %}
-                                <p class="value">Completed</p>
-                                {% else %}
-                               <p class="value">{{data['Items'][i]['Status_Now']}}</p>
-			{% endif %} -->
 
-      <p class="label">Donated by</p>
-        {% for donor in data['Items'][i]['Donated_By'] %}
-                                <p class="value">{{donor}}</p>
-      {% endfor %}
+      <p class="label">District</p>
+      <p  class="value"><a  style="text-decoration: none; color:#157159;">{{data['Items'][i]['District']}}</a> 
+    </p>
 	    
 
 	  </div>
