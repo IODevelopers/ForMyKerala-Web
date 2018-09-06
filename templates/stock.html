@@ -25,9 +25,10 @@
           axisYType: "secondary",
           color: "#014D65",
           dataPoints: [
-            { y: 3, label: "Sweden" },
-            { y: 7, label: "Taiwan" },
-            { y: 5, label: "Russia" }
+          {%for items in data['Items'].keys()%}
+            { y: {{data['Items'][items]}}, label: "{{items}}" },
+            
+            {% endfor %}
           ]
         }]
       });
