@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>For My Kerala</title>
+    <link href="../static/css/newindex.css?v=1.0" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../static/form/images/icons/favicon.ico"/>
+
+    <script>   
+    	function alerter() {
+                    alert("Download the app to Donate");
+                    window.location="https://formykerala.in/#download";
+                }
+      function viewmore(LastEvaluatedKey){
+        window.location="/loadmorerequestsfulfilled/"+LastEvaluatedKey;
+
+      }
+
+	</script>
+  </head>
+  <body>
+    <div id="header">
+    	<br>
+      <h2>For My Kerala - Fulfilled Requests</h2>
+     
+     <form method="POST" action="">
+        <fieldset>
+          <label for = "district">District</label>
+          <select id  = "district" name = "district">
+            <option>Alappuzha</option>
+            <option>Eranakulam</option>
+            <option>Idukki</option>
+            <option>Kannur</option>
+            <option>Kasaragod</option>
+            <option>Kollam</option>
+            <option>Kottayam</option>
+            <option>Kozhikode</option>
+            <option>Malappuram</option>
+            <option>Palakkad</option>
+            <option>Pathanamthitta</option>
+            <option>Thiruvananthapuram</option>
+            <option>Thrissur</option>
+            <option>Wayanad</option>
+          </select>
+        </fieldset>
+        
+        <input type="submit" Value="Search"/>
+            </form>
+    </div>
+   
+    
+    <br>
+    <div id="listing">
+      <div id="sorter">
+	<span class="request"><span class="count">{{data['Count']}}</span> Requests on this page</span>
+	
+      </div>
+      {%for i in range(0,data['Count'])%}
+      <div class="card">
+	<div  class="location-and-number">
+	  <div class="location">
+	    <p class="label">Requested From</p>
+	    <p class="value">{{data['Items'][i]['Name']}} </p>
+	  </div>
+	  <div class="phone-number">
+	    <p class="label">Date & Time</p>
+	    <p style="color:black;" class="value">{{change_epoch(data['Items'][i]['TimeIndex'])}}</p>
+	    
+	  </div>
+	
+	  <div class="phone-number district" > 
+	    <p class="label">District</p>
+	    <p  class="value"><a  style="text-decoration: none; color:#157159;">{{data['Items'][i]['District']}}</a> 
+    </p>
+	  </div>
+	</div>
+	<div class="quantity-and-notes">
+	  <div class="quantity">
+	    <p class="label">Quantity</p>
+	    <p class="value">{%for j in data['Items'][i]['Original_Items'].keys()%}
+                                &nbsp;&nbsp;&nbsp;{{ j }} &nbsp; {{ data['Items'][i]['Original_Items'][j] }}<br/>
+                                      {% endfor %}
+        </p>
+	  </div>
+	  <div class="notes">
+	    <!-- <p class="label">Status</p>
+	      {% if data['Items'][i]['Status_Now'] == "Closed" %}
+                                <p class="value">Completed</p>
+                                {% else %}
+                               <p class="value">{{data['Items'][i]['Status_Now']}}</p>
+			{% endif %} -->
+
+      <p class="label">Donated by</p>
+        {% for donor in data['Items'][i]['Donated_By'] %}
+                                <p class="value">{{donor}}</p>
+      {% endfor %}
+	    
+
+	  </div>
+	</div>
+      </div>
+      {% endfor %}
+      <br>
+      
+      {% if 'LastEvaluatedKey' in data %}
+      
+      <center>
+        <div class="buttons">
+        <button  class="accept-request" onclick="viewmore({{data['LastEvaluatedKey']['TimeIndex']}})"> View More </button></center>
+      </div>
+        {% else %}
+      <center><h2>No more Requests</h2></center>
+      {% endif %}
+      <br>
+      <br>
+    </div>
+  </body>
+</html>
