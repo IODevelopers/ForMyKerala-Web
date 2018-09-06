@@ -563,8 +563,26 @@ def verifyvolunteer():
 @app.route('/editstock', methods=['GET','POST'])
 @is_admin_logged_in 
 def edit_stock():
-    return render_template("stock.html")
+    
+    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/volunteer/get-stock'
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    data = r.json()
+    count = len(list(data['Items'].keys()))
+    print(count)
+    return render_template("stock.html",data=data,count=count)
 
+@app.route('/stock', methods=['GET','POST'])
+
+def stock():
+    
+    url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/volunteer/get-stock'
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    data = r.json()
+    count = len(list(data['Items'].keys()))
+    print(count)
+    return render_template("stock1.html",data=data,count=count)
 
 @app.route('/admin-dashboard', methods=['GET','POST'])
 @is_admin_logged_in 
