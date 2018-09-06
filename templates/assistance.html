@@ -9,8 +9,181 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" name="description" content="Easily create forms as beautiful as you.">
-    <script>function addItems(){var e=document.getElementById("item-list"),t=document.getElementById("required-items"),d=e.options[e.selectedIndex].value;if(document.getElementsByName(d).length<=0){var n=document.createTextNode(d);t.appendChild(n);var m=document.createElement("input");m.setAttribute("type","number"),m.setAttribute("name",d),m.setAttribute("placeholder","Number of Items"),m.required=!0,t.appendChild(m)}else alert("Item already added")}
+        <script>function addItems(){var e=document.getElementById("item-list"),t=document.getElementById("required-items"),d=e.options[e.selectedIndex].value;if(document.getElementsByName(d).length<=0){var n=document.createTextNode(d);t.appendChild(n);var m=document.createElement("input");m.setAttribute("type","number"),m.setAttribute("name",d),m.setAttribute("placeholder","Number of Items"),m.required=!0,t.appendChild(m)}else alert("Item already added")}
+        var district;
+    function getTaluk(district){
+        
+        document.getElementById("taluk").innerHTML= "";
+        document.getElementById("block").innerHTML= "";
+    
+  // Begin accessing JSON data here
+  var data = {
+  Alappuzha: [
+    'Ambalappuzha',
+    'Chengannoor',
+    'Cherthala',
+    'Karthikappally',
+    'Kuttanad',
+    'Mavelikkara'
+  ],
+  Eranakulam: [
+    'Aluva',
+    'Kanayannoor',
+    'Kochi',
+    'Kothamangalam',
+    'Kunnathunad',
+    'Muvattupuzha',
+    'Paravur'
+  ],
+  Idukki: [
+    'Devikulam',
+    'Idukki',
+    'Peerumede',
+    'Thodupuzha',
+    'Udumbanchola'
+  ],
+  Kannur: [
+    'Irrity',
+    'Kannur',
+    'Payyanur',
+    'Thalaserry',
+    'Thaliparambu'
+  ],
+  Kasaragod: [
+    'Hosdurg',
+    'Kasaragod',
+    'Manjeshwaram',
+    'Vellarikundu'
+  ],
+  Kollam: [
+    'Karunagappally',
+    'Kollam',
+    'Kottarakkara',
+    'Kunnathur',
+    'Pathanapuram',
+    'Punalur'
+  ],
+  Kottayam: [
+    'Changanacherry',
+    'Kottayam',
+    'Kanjirappally',
+    'Vaikom',
+    'Meenachil'
+  ],
+  Kozhikode: [
+    'Koyilandi',
+    'Kozhikode',
+    'Thamarassery',
+    'Vadakara'
+  ],
+  Malapuram: [
+    'Ernad',
+    'Kondotty',
+    'Nilambur',
+    'Perintalmanna',
+    'Ponnani',
+    'Tirur',
+    'Tirurangadi'
+  ],
+  Palakkad: [
+    'Alathur',
+    'Chittur',
+    'Mannarkkad',
+    'Ottappalam',
+    'Palakkad',
+    'Pattambi'
+  ],
+  Pathanamthitta: [
+    'Adoor',
+    'Kooni',
+    'Kozhencherry',
+    'Mallappally',
+    'Ranni',
+    'Thiruvalla'
+  ],
+  Thiruvananthapuram: [
+    'Chirayinkeezhu',
+    'Kattakada',
+    'Nedumangad',
+    'Neyyantinkara',
+    'Thiruvananthapuram',
+    'Varkala'
+  ],
+  Thrissur: [
+    'Thrissur',
+    'Chalakudy',
+    'Chavakkad',
+    'Kodungallur',
+    'Kunnamkulam',
+    'Mukundapuram',
+    'Thalappilly'
+  ],
+  Wayanad: [
+    'Mananthavady',
+    'SultanBathery',
+    'Vaitiri'
+  ]
+};
 
+  var data2 = {
+  Alappuzha: [
+    'Ambalapuzha',
+    'Aryad',
+    'Baranikkava',
+    'Chambakkulam',
+    'Chengannor',
+    'Harippad',
+    'Kanjikuzhi',
+    'Mavelikkara',
+    'Muthukulam',
+    'Pattanakkadu',
+    'Thykkattussery',
+    'Veliyanad'
+  ],
+  Idukki: [
+    'Adimali',
+    'Azhutha',
+    'Devikulam',
+    'Elamdesam',
+    'Idukki',
+    'Kattappana',
+    'Nedumkandom',
+    'Thodupuzha'
+  ],
+  Kottayam: [
+    'Erattupetta',
+    'Ettumanoor',
+    'Kaduthuruthi',
+    'Kanjirappally',
+    'Lalam',
+    'Madappally',
+    'Pallam',
+    'Pampady',
+    'Uzhavoor',
+    'Vaikom',
+    'Vazhoor'
+  ],
+  Pathanamthitta: [
+    'Elamthoor',
+    'Koipram',
+    'Konni',
+    'Kulanada',
+    'Mallappally',
+    'Pandalam',
+    'Parakkode',
+    'Pulikeezhu',
+    'Ranni'
+  ]
+};
+
+for (var i=0 ; i < data[district].length ; i++)
+{
+    document.getElementById("taluk").innerHTML+="<option>"+data[district][i]+"</option";
+}for (var i=0 ; i < data2[district].length ; i++)
+{
+    document.getElementById("block").innerHTML+="<option>"+data2[district][i]+"</option";
+}
+}
 
 </script>
 
@@ -88,7 +261,7 @@
                             District
 
                             <div class="">
-                                <select class="form-control form-control-sm" id="district" name="district" required>
+                                <select class="form-control form-control-sm" id="district" name="district" onchange="getTaluk(this.value)" required>
                                     <option value="" disabled selected>Select your district</option>
                                     <option>Alappuzha</option>
                                     <option>Eranakulam</option>
@@ -104,6 +277,29 @@
                                     <option>Thiruvananthapuram</option>
                                     <option>Thrissur</option>
                                     <option>Wayanad</option>
+                                </select>
+
+
+                                                        </div>
+                                                    </div>
+                        <div class="CenteredPage__field">
+                            Taluk
+                            <div class="" id="taluk-list">
+                                <select class="form-control form-control-sm" id="taluk" name="taluk" required>
+                                    <option value="" disabled selected>Select your taluk</option>
+                                    
+                                </select>
+
+
+                                                        </div>
+                        </div>
+
+                        <div class="CenteredPage__field">
+                            Block
+                            <div class="" id="block-list">
+                                <select class="form-control form-control-sm" id="block" name="block">
+                                    <option value="" disabled selected>Select your block</option>
+                                    
                                 </select>
 
 

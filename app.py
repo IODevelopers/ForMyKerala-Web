@@ -375,6 +375,11 @@ def volunteer_request():
         comments = request.form['comments']
         items_required = {}
         district = request.form['district']
+        taluk = request.form['taluk']
+        try:
+            block = request.form['block']
+        except:
+            block = ""
         for each_item in items_from_web:
             try:
                 items_required[each_item] = request.form[each_item]
@@ -390,7 +395,7 @@ def volunteer_request():
             return render_template("volunteer-request.html",message = message,data = data,count = count)
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web'
         data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district,
-        'Status_Now': 'Verified', 'Verified_by': session['PhoneNumber'], 'Comments': comments}
+        'Status_Now': 'Verified', 'Verified_by': session['PhoneNumber'], 'Comments': comments, "Taluk":taluk, "Block": block}
         
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
@@ -665,6 +670,11 @@ def requesthelp():
         address = request.form['address']
         items_required = {}
         district = request.form['district']
+        taluk = request.form['taluk']
+        try:
+            block = request.form['block']
+        except:
+            block = ""
         for each_item in items_from_web:
             try:
                 items_required[each_item] = request.form[each_item]
@@ -679,7 +689,7 @@ def requesthelp():
             count = len(data['Items'])
             return render_template("assistance.html",message = message,data = data,count = count)
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/register-web'
-        data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district}
+        data = {'Name':name,'PhoneNumber':phone,'Address':address,'Items':items_required,'Platform':"Web",'District':district, "Taluk":taluk, "Block":block}
         
         headers = {'content-type': 'application/json'}
         r=requests.post(url, data=json.dumps(data), headers=headers)
@@ -697,6 +707,7 @@ def requesthelp():
     r=requests.get(url, headers=headers)
     data = r.json()
     count = len(data['Items'])
+
     return render_template("assistance.html", data = data,count = count)
 
 
@@ -834,3 +845,5 @@ def website_help():
 if __name__=='__main__':
     app.secret_key='secret123'
     app.run(threaded=True,host="0.0.0.0",port=80)
+
+app.secret_key='secret123'
