@@ -31,6 +31,7 @@
           color: "#157159",
           dataPoints: [
 
+
           {%for items in data['Items'].keys()%}
             { y: {{data['Items'][items]}}, label: "{{items}}" },
             
@@ -40,6 +41,12 @@
       });
       chart.render();
       
+      }
+
+      function editinventory(items){
+        alert(items);
+        var x = prompt("Enter new count");
+        window.location="/editinventory/"+items+"&"+x;
       }
     </script>
   </head>
@@ -54,21 +61,18 @@
     <br>
     <br>
     <br>
-    <div class="container">
-        <div id="chartContainer" style="height: 400px; width: 100%;"></div>
-          <script src="../static/assets1/js/chart.js"></script><br><br><br>
-        </div>
+      <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+      <script src="../static/assets1/js/chart.js"></script>
 
-      
       <br><br>
       <div class="container">
-          <table class="responsive-table highlight centered">
+          <table class="highlight">
               <thead>
                 <tr>
-                  <th>Item</th>
-                    <th>Nos.</th>
+                    <th><b>Item</b></th>
+                    <th><b>Quantity</b></th>
                     
-                    <th>New Value</th>
+                    <th><b>New Value</b></th>
                 </tr>
               </thead>
       
@@ -81,15 +85,13 @@
                   
                   <td>{{items}}</td>
                   <td>{{data['Items'][items]}}</td>
-                  <td><button class="button primary" value="Edit" onclick="editinventory()"> EDIT </button></td>
+                  <td><button class="button primary" value="Edit" onclick="editinventory('{{items}}')"> EDIT </button></td>
                 </tr>
                 {% endfor %}
               </tbody>
             </table>
       </div>
-    <br>
-    <br>
-    <br>
-    
+
+    <br><br><br>
   </body>
 </html>

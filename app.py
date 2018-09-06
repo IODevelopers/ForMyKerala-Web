@@ -39,6 +39,26 @@ def home():
         return render_template("index.html")
 
 
+
+@app.route('/editinventory/<string:timeindex>',methods=['GET','POST'])
+@is_admin_logged_in
+def editinventory(timeindex):
+    print(timeindex)
+    timeindexlist = timeindex.split('&')
+    if timeindexlist[1] == 'null':
+        return redirect(url_for('edit_stock'))
+    url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/admin/edit-stock'
+    data = {'Item':{timeindexlist[0]:timeindexlist[1]}}
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data), headers=headers)
+    data = r.json()
+    return redirect(url_for('edit_stock'))
+
+
+
+
+
+
 @app.route('/accept/<string:timeindex>',methods=['GET','POST'])
 @is_logged_in
 def accept(timeindex):
