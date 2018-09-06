@@ -54,45 +54,42 @@
     <br>
     <br>
     <br>
-      <div id="chartContainer" style="height: 400px; width: 100%;"></div>
-      <script src="../static/assets1/js/chart.js"></script>
-<<<<<<< HEAD
+    <div class="container">
+        <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+          <script src="../static/assets1/js/chart.js"></script><br><br><br>
+        </div>
 
-
-    
-=======
-      <hr>
+      
       <br><br>
       <div class="container">
           <table class="responsive-table highlight centered">
               <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Item Name</th>
-                    <th>Item Price</th>
+                  <th>Item</th>
+                    <th>Nos.</th>
+                    
+                    <th>Edit</th>
                 </tr>
               </thead>
       
               <tbody>
+                
+                {%for items in data['Items'].keys()%}
+                  
+                  
                 <tr>
-                  <td>Alvin</td>
-                  <td>Eclair</td>
-                  <td>$0.87</td>
+                  
+                  <td>{{items}}</td>
+                  <td>{{data['Items'][items]}}</td>
+                  <td><button class="button primary" value="Edit" onclick="editinventory()"> EDIT </button></td>
                 </tr>
-                <tr>
-                  <td>Alan</td>
-                  <td>Jellybean</td>
-                  <td>$3.76</td>
-                </tr>
-                <tr>
-                  <td>Jonathan</td>
-                  <td>Lollipop</td>
-                  <td>$7.00</td>
-                </tr>
+                {% endfor %}
               </tbody>
             </table>
       </div>
-    <br><br><br>
->>>>>>> 5df21e6ec3bdbac171c5ef0afe23849252d15f49
+    <br>
+    <br>
+    <br>
+    
   </body>
 </html>
