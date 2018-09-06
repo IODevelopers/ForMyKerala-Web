@@ -122,7 +122,7 @@
 	      {% if android['Items'][i]['Status_Now'] == "Verified" %}
                                 <p class="value" style="color:#157159;">Verified by {{android['Items'][i]['Verified_by']}} </p>
                                 {% else %}
-                               <p class="value" style="color:#711515;" >Not Verified</p>
+                               <p class="value" style="color:#711515;" >{{android['Items'][i]['Status_Now']}}</p>
 			{% endif %}
 	    
 
