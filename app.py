@@ -560,6 +560,11 @@ def verifyvolunteer():
     print(vols)
     return render_template("verifyvolunteers.html",donors=vols)
 
+@app.route('/editstock', methods=['GET','POST'])
+@is_admin_logged_in 
+def edit_stock():
+    return render_template("stock.html")
+
 
 @app.route('/admin-dashboard', methods=['GET','POST'])
 @is_admin_logged_in 
