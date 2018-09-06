@@ -41,6 +41,12 @@
       chart.render();
       
       }
+
+      function editinventory(items){
+        alert(items);
+        var x = prompt("Enter new count");
+        window.location="/editinventory/"+items+"&"+x;
+      }
     </script>
   </head>
   <body>
@@ -54,6 +60,8 @@
     <br>
     <br>
     <br>
+    <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+    <script src="../static/assets1/js/chart.js"></script>
       
       <br><br>
       <div class="container">
@@ -76,14 +84,13 @@
                   
                   <td>{{items}}</td>
                   <td>{{data['Items'][items]}}</td>
-                  <td><button class="button primary" value="Edit" onclick="editinventory()"> EDIT </button></td>
+                  <td><button class="button primary" value="Edit" onclick="editinventory('{{items}}')"> EDIT </button></td>
                 </tr>
                 {% endfor %}
               </tbody>
             </table>
       </div>
-      <div id="chartContainer" style="height: 400px; width: 100%;"></div>
-      <script src="../static/assets1/js/chart.js"></script>
+     
     <br><br><br>
   </body>
 </html>
