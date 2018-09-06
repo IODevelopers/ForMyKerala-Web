@@ -54,6 +54,11 @@
     <br>
     <br>
     <br>
+    <div class="container">
+        <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+          <script src="../static/assets1/js/chart.js"></script><br><br><br>
+        </div>
+
       
       <br><br>
       <div class="container">
@@ -63,7 +68,7 @@
                   <th>Item</th>
                     <th>Nos.</th>
                     
-                    <th>New Value</th>
+                   
                 </tr>
               </thead>
       
@@ -76,14 +81,15 @@
                   
                   <td>{{items}}</td>
                   <td>{{data['Items'][items]}}</td>
-                  <td><button class="button primary" value="Edit" onclick="editinventory()"> EDIT </button></td>
+                  
                 </tr>
                 {% endfor %}
               </tbody>
             </table>
       </div>
-      <div id="chartContainer" style="height: 400px; width: 100%;"></div>
-      <script src="../static/assets1/js/chart.js"></script>
-    <br><br><br>
+    <br>
+    <br>
+    <br>
+    
   </body>
 </html>
