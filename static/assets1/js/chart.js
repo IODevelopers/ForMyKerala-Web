@@ -529,7 +529,7 @@
 				content: null,
 				contentFormatter: null,
 				reversed: !1,
-				backgroundColor: v ? "rgba(255,255,255,.9)" : "rgb(255,255,255)",
+				backgroundColor: "rgb(247,247,251)",
 				borderColor: null,
 				borderThickness: 2,
 				cornerRadius: 5,
@@ -647,10 +647,10 @@
 				maxNumberOfAutoBreaks: 2,
 				spacing: 8,
 				type: "straight",
-				color: "#FFFFFF",
+				color: "#F7F7FB",
 				fillOpacity: 0.9,
 				lineThickness: 2,
-				lineColor: "#E16E6E",
+				lineColor: "#157159",
 				lineDashType: "solid",
 				publicProperties:
 				{
@@ -668,7 +668,7 @@
 				endValue: null,
 				spacing: 8,
 				type: "straight",
-				color: "#FFFFFF",
+				color: "#F7F7FB",
 				fillOpacity: 0.9,
 				lineThickness: 2,
 				lineColor: "#E16E6E",
@@ -855,7 +855,7 @@
 		z = 14,
 		Sa = {
 			colorSet: "colorSet1",
-			backgroundColor: "#FFFFFF",
+			backgroundColor: "#F7F7FB",
 			title:
 			{
 				fontFamily: Ea,
@@ -1085,8 +1085,8 @@
 			}
 		};
 	T = fa = "#F5F5F5";
-	J = "#FFFFFF";
-	Z = "#40BAF1";
+	J = "#F7F7FB";
+	Z = "#157159";
 	ea = "#F5F5F5";
 	var ba = 20,
 		z = 14,
@@ -1321,8 +1321,8 @@
 			}
 		};
 	T = fa = "#F5F5F5";
-	J = "#FFFFFF";
-	Z = "#40BAF1";
+	J = "#F7F7FB";
+	Z = "#157159";
 	ea = "#F5F5F5";
 	ba = 20;
 	z = 14;
@@ -1572,9 +1572,9 @@
 			backgroundColor: "rgba(0, 0, 0, .7)"
 		}
 	};
-	J = "#FFFFFF";
+	J = "#F7F7FB";
 	T = fa = "#FAFAFA";
-	Z = "#40BAF1";
+	Z = "#157159";
 	ea = "#F5F5F5";
 	var ba = 20,
 		z = 14,
@@ -11652,8 +11652,8 @@
 					var c = this.chart.data[ e.dataSeriesIndex ],
 						g = c.dataPoints[ e.dataPointIndex ],
 						h = e.dataPointIndex;
-					!1 === g.highlightEnabled || !0 !== c.highlightEnabled && !0 !== g.highlightEnabled || ( "line" === c.type || "stepLine" === c.type || "spline" === c.type || "scatter" === c.type || "area" === c.type || "stepArea" === c.type || "splineArea" === c.type || "stackedArea" === c.type || "stackedArea100" === c.type || "rangeArea" === c.type || "rangeSplineArea" === c.type ? ( g = c.getMarkerProperties( h, e.x1, e.y1, this.chart.overlaidCanvasCtx ), g.size = Math.max( 1.5 * g.size << 0, 10 ), g.borderColor = g.borderColor || "#FFFFFF", g.borderThickness = g.borderThickness || Math.ceil( 0.1 *
-							g.size ), $.drawMarkers( [ g ] ), "undefined" !== typeof e.y2 && ( g = c.getMarkerProperties( h, e.x1, e.y2, this.chart.overlaidCanvasCtx ), g.size = Math.max( 1.5 * g.size << 0, 10 ), g.borderColor = g.borderColor || "#FFFFFF", g.borderThickness = g.borderThickness || Math.ceil( 0.1 * g.size ), $.drawMarkers( [ g ] ) ) ) : "bubble" === c.type ? ( g = c.getMarkerProperties( h, e.x1, e.y1, this.chart.overlaidCanvasCtx ), g.size = e.size, g.color = "white", g.borderColor = "white", f.globalAlpha = 0.3, $.drawMarkers( [ g ] ), f.globalAlpha = 1 ) : "column" === c.type || "stackedColumn" ===
+					!1 === g.highlightEnabled || !0 !== c.highlightEnabled && !0 !== g.highlightEnabled || ( "line" === c.type || "stepLine" === c.type || "spline" === c.type || "scatter" === c.type || "area" === c.type || "stepArea" === c.type || "splineArea" === c.type || "stackedArea" === c.type || "stackedArea100" === c.type || "rangeArea" === c.type || "rangeSplineArea" === c.type ? ( g = c.getMarkerProperties( h, e.x1, e.y1, this.chart.overlaidCanvasCtx ), g.size = Math.max( 1.5 * g.size << 0, 10 ), g.borderColor = g.borderColor || "#F7F7FB", g.borderThickness = g.borderThickness || Math.ceil( 0.1 *
+							g.size ), $.drawMarkers( [ g ] ), "undefined" !== typeof e.y2 && ( g = c.getMarkerProperties( h, e.x1, e.y2, this.chart.overlaidCanvasCtx ), g.size = Math.max( 1.5 * g.size << 0, 10 ), g.borderColor = g.borderColor || "#F7F7FB", g.borderThickness = g.borderThickness || Math.ceil( 0.1 * g.size ), $.drawMarkers( [ g ] ) ) ) : "bubble" === c.type ? ( g = c.getMarkerProperties( h, e.x1, e.y1, this.chart.overlaidCanvasCtx ), g.size = e.size, g.color = "white", g.borderColor = "white", f.globalAlpha = 0.3, $.drawMarkers( [ g ] ), f.globalAlpha = 1 ) : "column" === c.type || "stackedColumn" ===
 						c.type || "stackedColumn100" === c.type || "bar" === c.type || "rangeBar" === c.type || "stackedBar" === c.type || "stackedBar100" === c.type || "rangeColumn" === c.type || "waterfall" === c.type ? X( f, e.x1, e.y1, e.x2, e.y2, "white", 0, null, !1, !1, !1, !1, 0.3 ) : "pie" === c.type || "doughnut" === c.type ? pa( f, e.center, e.radius, "white", c.type, e.startAngle, e.endAngle, 0.3, e.percentInnerRadius ) : "funnel" === c.type || "pyramid" === c.type ? qa( f, e.funnelSection, 0.3, "white" ) : "candlestick" === c.type ? ( f.globalAlpha = 1, f.strokeStyle = e.color, f.lineWidth = 2 * e.borderThickness,
 							c = 0 === f.lineWidth % 2 ? 0 : 0.5, f.beginPath(), f.moveTo( e.x3 - c, Math.min( e.y2, e.y3 ) ), f.lineTo( e.x3 - c, Math.min( e.y1, e.y4 ) ), f.stroke(), f.beginPath(), f.moveTo( e.x3 - c, Math.max( e.y1, e.y4 ) ), f.lineTo( e.x3 - c, Math.max( e.y2, e.y3 ) ), f.stroke(), X( f, e.x1, Math.min( e.y1, e.y4 ), e.x2, Math.max( e.y1, e.y4 ), "transparent", 2 * e.borderThickness, e.color, !1, !1, !1, !1 ), f.globalAlpha = 1 ) : "ohlc" === c.type ? ( f.globalAlpha = 1, f.strokeStyle = e.color, f.lineWidth = 2 * e.borderThickness, c = 0 === f.lineWidth % 2 ? 0 : 0.5, f.beginPath(), f.moveTo( e.x3 - c, e.y2 ), f.lineTo( e.x3 -
 							c, e.y3 ), f.stroke(), f.beginPath(), f.moveTo( e.x3, e.y1 ), f.lineTo( e.x1, e.y1 ), f.stroke(), f.beginPath(), f.moveTo( e.x3, e.y4 ), f.lineTo( e.x2, e.y4 ), f.stroke(), f.globalAlpha = 1 ) : "boxAndWhisker" === c.type ? ( f.save(), f.globalAlpha = 1, f.strokeStyle = e.stemColor, f.lineWidth = 2 * e.stemThickness, 0 < e.stemThickness && ( f.beginPath(), f.moveTo( e.x3, e.y2 + e.borderThickness / 2 ), f.lineTo( e.x3, e.y1 + e.whiskerThickness / 2 ), f.stroke(), f.beginPath(), f.moveTo( e.x3, e.y4 - e.whiskerThickness / 2 ), f.lineTo( e.x3, e.y3 - e.borderThickness / 2 ), f.stroke() ),

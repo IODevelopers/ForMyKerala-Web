@@ -30,7 +30,6 @@ footer, header, hgroup, menu, nav, section {
 }
 
 .button {
-    box-shadow: none;
     background-color: #ffffff;
 	color: #11a25a !important;
 	text-decoration: none;
