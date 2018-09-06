@@ -839,8 +839,8 @@
 			en:
 			{}
 		},
-		x = v ? "Trebuchet MS, Helvetica, sans-serif" : "Arial",
-		Ea = v ? "Impact, Charcoal, sans-serif" : "Arial",
+		x = v ? "Segoe UI, Helvetica Neue, sans-serif" : "Arial",
+		Ea = v ? "Segoe UI, Helvetica Neue, sans-serif" : "Arial",
 		za = {
 			colorSet1: "#4F81BC #C0504E #9BBB58 #23BFAA #8064A1 #4AACC5 #F79647 #7F6084 #77A033 #33558B #E59566".split( " " ),
 			colorSet2: "#6D78AD #51CDA0 #DF7970 #4C9CA0 #AE7D99 #C9D45C #5592AD #DF874D #52BCA8 #8E7AA3 #E3CB64 #C77B85 #C39762 #8DD17E #B57952 #FCC26C".split( " " ),
