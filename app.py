@@ -224,6 +224,10 @@ def edit(timeindex):
 def admin_home():
     return render_template("admin-home.html")
 
+@app.route('/ngo-home', methods=['GET','POST']) #landing page admin 
+@is_admin_logged_in 
+def ngo_home():
+    return render_template("ngo-home.html")
 
 
 
@@ -552,6 +556,35 @@ def admin_login():
 
         return render_template("admin-login.html", message=message)
     return render_template("admin-login.html")
+
+@app.route('/ngo-login', methods=['GET','POST']) #landing page
+def ngo_login():
+    if request.method =="POST":
+        username = request.form['username']
+        password = request.form['password']
+        url= "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/donors/login/NGO"
+        data = {'Username':username, 'Password': password}
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url, data=json.dumps(data), headers=headers)
+        data = r.json()
+        if data['Message'] == "Success":
+            # session['PhoneNumber']=data['PhoneNumber']
+            # session['TimeIndex']=data['TimeIndex']
+            # session['Email']=data['Email']
+            # session['District']=data['District']
+            # session['Name']=data['Name']
+            session['admin_logged_in'] = True
+            session['PhoneNumber']='123'
+            return redirect(url_for('ngo_home'))
+        elif data['Message'] == "Invalid credentials":
+            message = "Invalid credentials"
+        else:
+            message = "Can't connect to server!"
+
+        return render_template("ngo-login.html", message=message)
+    return render_template("ngo-login.html")
+
+
 
 @app.route('/verifyrequests', methods=['GET','POST'])
 @is_admin_logged_in 
