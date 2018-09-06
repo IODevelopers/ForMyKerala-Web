@@ -56,6 +56,14 @@
       <h2>For My Kerala - Volunteer Dashboard</h2>
      
      <h2> Volunteer Dashboard </h2>
+     <form>
+      <fieldset>
+        <label for = "district">Name</label>
+        <input type = "text" name = "name">
+      </fieldset>
+      
+      <input type="submit" Value="Search"/>
+          </form>
     </div>
     <br>
     <br>
@@ -63,7 +71,7 @@
     <div id="listing">
       <div id="sorter">
 	<span class="request"><span class="count">100+</span> Active Requests </span>
-	
+	<span class="selector"><select name="sort"><option>Verified</option><option>Pending</option><option>Accepted</option></select>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Sort"></span>
       </div>
       {%for i in range(0,android['Count'])%}
       <div class="card">
