@@ -23,8 +23,9 @@
           type: "bar",
           name: "companies",
           axisYType: "secondary",
-          color: "#014D65",
+          color: "#157159",
           dataPoints: [
+
           {%for items in data['Items'].keys()%}
             { y: {{data['Items'][items]}}, label: "{{items}}" },
             
