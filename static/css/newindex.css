@@ -28,22 +28,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-
-.button {
-    background-color: #ffffff;
-	color: #11a25a !important;
-	text-decoration: none;
-	border-radius: 6px;
-    border: 0;
-    cursor: pointer;
-    display: inline-block;
-    font-weight: bold;
-    height: 2em;
-    line-height: 2em;
-    padding: 0 1.75em;
-    text-align: center;
-    white-space: nowrap;
-}
 body {
 	line-height: 1;
 }
@@ -208,6 +192,21 @@ margin-bottom: 0.75rem;
 
 }
 
+.buttons {
+	padding-bottom: 1rem;
+}
+
+
+.buttons button {
+	appearance: none;
+	border: 0;
+	padding: 0.75rem 1rem;
+	border-radius: 4px;
+	text-transform: uppercase;
+	font-weight: bold;
+	display: table-cell;
+	margin-top: 5px;
+}
 
 .view-map {
 	background: #3DA1EE;
@@ -224,6 +223,10 @@ margin-bottom: 0.75rem;
 
 }
 
+.share-button {
+	color: #157159;
+	background: #EBEBEB;
+}
 .district{
 	float: right;
 	margin-right: 3em;
