@@ -80,8 +80,12 @@
 	  <div class="quantity">
 	    <p class="label">Quantity</p>
 	    <p class="value">{%for j in data['Items'][i]['Original_Items'].keys()%}
-                                &nbsp;&nbsp;&nbsp;{{ j }} &nbsp; {{ data['Items'][i]['Original_Items'][j] }}<br/>
-                                      {% endfor %}
+                              {% if not(j.startswith("Undergarments")) %}
+                                &nbsp;&nbsp;&nbsp;{{ j }} &nbsp;
+                                {{data['Items'][i]['Original_Items'][j] }}<br/>
+                                      
+                                {% endif %}
+                                {% endfor %}
         </p>
 	  </div>
 	  <div class="notes">
