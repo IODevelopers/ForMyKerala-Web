@@ -584,6 +584,28 @@ def ngo_login():
         return render_template("ngo-login.html", message=message)
     return render_template("ngo-login.html")
 
+@app.route('/ngo-reg', methods=['GET','POST']) #landing page
+def ngo_reg():
+    if request.method =="POST":
+        name = request.form['name']
+        type = request.form['type']
+        address = request.form['address']
+        district = request.form['district']
+        contact_person = request.form['contact_person']
+        contact_number = request.form['contact_number']
+        about = request.form['org_about']
+        families = request.form['families']
+
+        print(name,type,address,district,contact_person,contact_number,about,families)
+        url= "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/ngo/registeration/reciever"
+        data = {'Name':name, 'Type': type, 'Address': address,'District':district,'ContactPerson':contact_person,'ContactNumber':contact_number,'About':about,'Families':families}
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url, data=json.dumps(data), headers=headers)
+        data = r.json()
+        print(data)
+        message=data['Message']
+        return render_template("ngo-reg.html", message=message)
+    return render_template("ngo-reg.html")
 
 
 @app.route('/verifyrequests', methods=['GET','POST'])
