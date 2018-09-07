@@ -128,7 +128,75 @@ body {
 	right: 0;
 
 }
+/*Custom Search Box*/
+.search-btn {
+	appearance: none;
+	border: 0;
+	padding: .5rem 1rem;
+	border-radius: 4px;
+	text-transform: uppercase;
+	font-weight: bold;
+	display: table-cell;
+	margin-top: 15px;
+}
 
+.custom-select {
+	position: relative;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 15px;
+	margin-bottom: 10px;
+  }
+  .custom-select select {
+	display: none; /*hide original SELECT element:*/
+  }
+  .select-selected {
+	background-color: #DDDDDD;
+	border-radius: 5px;
+	width: 150px;
+	text-align: center;
+  }
+  /*style the arrow inside the select element:*/
+  .select-selected:after {
+	position: absolute;
+	content: "";
+	top: 14px;
+	right: 10px;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-color: rgb(0, 0, 0) transparent transparent transparent;
+  }
+  /*point the arrow upwards when the select box is open (active):*/
+  .select-selected.select-arrow-active:after {
+	border-color: transparent transparent black transparent;
+	top: 7px;
+  }
+  /*style the items (options), including the selected item:*/
+  .select-items div,.select-selected {
+	color: black;
+	padding: 8px 16px;
+	border: 1px solid transparent;
+	border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+	cursor: pointer;
+  }
+  /*style items (options):*/
+  .select-items {
+	position: absolute;
+	background-color: #DDDDDD;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 99;
+	border-radius: 5px;
+	text-align: center;
+  }
+  /*hide the items when the select box is closed:*/
+  .select-hide {
+	display: none;
+  }
+  .select-items div:hover, .same-as-selected {
+	background-color: rgba(0, 0, 0, 0.1);
+  }
 .card {
 	background: white;
 	padding: 0 1rem;
