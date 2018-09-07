@@ -150,7 +150,7 @@ body {
 	display: none; /*hide original SELECT element:*/
   }
   .select-selected {
-	background-color: #DDDDDD;
+	background-color: #FFF;
 	border-radius: 5px;
 	width: 150px;
 	text-align: center;
@@ -182,7 +182,7 @@ body {
   /*style items (options):*/
   .select-items {
 	position: absolute;
-	background-color: #DDDDDD;
+	background-color: #FFF;
 	top: 100%;
 	left: 0;
 	right: 0;
