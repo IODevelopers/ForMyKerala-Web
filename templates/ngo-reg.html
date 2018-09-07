@@ -19,21 +19,64 @@
         <div class="invitepage__pageinner">
         <div>
             <a href="/"><img src="../static/images/logo-v2/logo-sq.png" width="120px" height="120px"></a>
-            <h1 style="margin: 15px 0; margin-top: 30px;">NGO | Login</h1>
-            <h2 style="margin: 0; margin-bottom: 25px;">Login to NGO Dasboard </h2>
+            <h1 style="margin: 15px 0; margin-top: 30px;">NGO | Registration</h1>
+            <h2 style="margin: 0; margin-bottom: 25px;">Register as NGO </h2>
           </div>
                         <div style="max-width: 350px;  margin: 0 auto;">
                                 {{message}}
                 <div class="invite__form">
                   <form class="form-horizontal" method="POST">
                      <div class="CenteredPage__field">
-                          <p>Username:<p>
+                          <p>Name of Organisation:<p>
                           <div class="">
-                              <input id="name" type="text"  name="username" value="" required>
+                              <input id="name" type="text"  name="org-name" value="" required>
                           </div>
-                          <p>Password:<p>
+                          <p>Organisation Type:<p>
+                            <div class="">
+                                <input id="name" type="text"  name="org-type" value="" required>
+                            </div>
+                        <p>Address:<p>
+                            <div class="">
+                                <input id="name" type="text"  name="address" value="" required>
+                            </div>
+                            <div class="CenteredPage__field">
+                                    District:
+        
+                                    <div class="">
+                                        <select class="form-control form-control-sm" id="district" name="district" required>
+                                            <option value="" disabled selected>Select your district</option>
+                                            <option>Kasaragod</option>
+                                            <option>Kannur</option>
+                                            <option>Wayanad</option>
+                                            <option>Kozhikode</option>
+                                            <option>Malappuram</option>
+                                            <option>Palakkad</option>
+                                            <option>Thrissur</option>
+                                            <option>Ernakulam</option>
+                                            <option>Idukki</option>
+                                            <option>Kottayam</option>
+                                            <option>Pathanamthitta</option>
+                                            <option>Alappuzha</option>
+                                            <option>Kollam</option>
+                                            <option>Thiruvananthapuram</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            <p>Person to Contact:<p>
+                                    <div class="">
+                                        <input id="name" type="text"  name="contact-person" value="" required>
+                                    </div>
+                                    <p>Contact Phone Number:<p>
+                                            <div class="">
+                                                <input id="name" type="number"  name="contact-number" value="" required>
+                                            </div>
+                            <p>About the Organisation:<p>
+                                    <div class="">
+                                        <textarea id="name" type="text"  name="org-about" value="" required></textarea>
+                                    </div>
+                          <p>Number of Families to Support:<p>
                           <div class="">
-                              <input id="name" type="password"  name="password" value="" required>
+                              <input id="name" type="number"  name="password" value="" required>
                           </div>
                       </div>
                       <div class="CenteredPage__field">
