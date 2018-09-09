@@ -9,7 +9,7 @@ from flask import Flask ,render_template, redirect, url_for, session, request, l
 
 
 app = Flask(__name__)
-#from flask_sslify import SSLify
+from flask_sslify import SSLify
 #sslify = SSLify(app)
 def is_logged_in(f):	# Function for implementing security and redirection
 	@wraps(f)
@@ -52,6 +52,10 @@ def editinventory(timeindex):
     headers = {'content-type': 'application/json'}
     r=requests.post(url, data=json.dumps(data), headers=headers)
     data = r.json()
+    import sys  
+    sys.path.insert(0,'/home/ubuntu/ForMyKerala-AWS-Link')
+    import ExportPDF
+    ExportPDF.ExportToS3()
     return redirect(url_for('edit_stock'))
 
 
@@ -643,7 +647,6 @@ def verifyvolunteer():
 @app.route('/editstock', methods=['GET','POST'])
 @is_admin_logged_in 
 def edit_stock():
-    
     url ='https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/volunteer/get-stock'
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
