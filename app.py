@@ -941,6 +941,23 @@ def fulfilled_requests():
     
     return render_template("fulfilledrequests.html",data=data)
 
+@app.route('/secretpage', methods=['GET','POST'])
+@is_admin_logged_in
+def secret_page():
+	if request.method == 'POST':
+		request_index = request.form['request']
+		donor = request.form['donor']
+		data = {"Request_TimeIndex": request_index,"Donor_TimeIndex": donor}
+		url = "https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/admin/accept-and-close"
+		headers = {'content-type': 'application/json'}
+		r = requests.post(url,data=json.dumps(data), headers=headers)
+		data = r.json()
+		print(data)
+		if 'Message' in data:
+			return render_template("secret-page.html", message=data['Message'])
+		else:
+			return render_template("secret-page.html")
+	return render_template("secret-page.html")
 
 @app.route('/disclaimer')
 def disclaimer():
