@@ -70,8 +70,8 @@
     <br>
     <div id="listing">
       <div id="sorter">
-	<span class="request"><span class="count">100+</span> Active Requests </span>
-	<span class="selector"><select name="sort"><option>Verified</option><option>Pending</option><option>Accepted</option></select>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Sort"></span>
+	<span class="request"><span class="count">{{android['Count']}}</span> Active Requests </span>
+	<span class="selector"><form method="POST"><select name="sort"><option>Verified</option><option>Pending</option><option>Accepted</option></select>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Sort"></form></span>
       </div>
       {%for i in range(0,android['Count'])%}
       <div class="card">

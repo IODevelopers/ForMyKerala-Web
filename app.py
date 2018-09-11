@@ -518,13 +518,24 @@ def volunteer_feedback():
 @is_logged_in 
 def volunteer_verifyrequests():
     if request.method == "POST":
-        name = request.form['name']
-        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/search/name-phonenumber'
-        data = {'Name':name}
-        headers = {'content-type': 'application/json'}
-        r=requests.post(url, data=json.dumps(data), headers=headers)
-        android = r.json()
-        return render_template("volunteer-verifyrequests.html",android=android)
+        sort = request.form.get('sort', None)
+        name = request.form.get('name',None)
+        if sort != None:
+            
+            url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/sort/status'
+            data = {'Status_Now':sort}
+            headers = {'content-type': 'application/json'}
+            r=requests.post(url, data=json.dumps(data), headers=headers)
+            android = r.json()
+            return render_template("volunteer-verifyrequests.html",android=android)
+            
+        if name != None:
+            url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/search/name-phonenumber'
+            data = {'Name':name}
+            headers = {'content-type': 'application/json'}
+            r=requests.post(url, data=json.dumps(data), headers=headers)
+            android = r.json()
+            return render_template("volunteer-verifyrequests.html",android=android)
         
 
     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-unverified-request"
