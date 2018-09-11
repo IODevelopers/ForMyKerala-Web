@@ -517,6 +517,16 @@ def volunteer_feedback():
 @app.route('/volunteer-verifyrequests', methods=['GET','POST'])
 @is_logged_in 
 def volunteer_verifyrequests():
+    if request.method == "POST":
+        name = request.form['name']
+        url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/search/name-phonenumber'
+        data = {'Name':name}
+        headers = {'content-type': 'application/json'}
+        r=requests.post(url, data=json.dumps(data), headers=headers)
+        android = r.json()
+        return render_template("volunteer-verifyrequests.html",android=android)
+        
+
     url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-unverified-request"
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
