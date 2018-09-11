@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>For My Kerala | Statistics</title>
+    <link href="../static/css/newindexstock.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../static/form/images/icons/favicon.ico"/>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <script>
+      window.onload = function () {
+        
+      var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        
+        axisX:{
+          interval: 1
+        },
+        axisY2:{
+          interlacedColor: "rgba(1,77,101,.2)",
+          gridColor: "rgba(1,77,101,.1)",
+          title: "Quantity of Items"
+        },
+        data: [{
+          type: "bar",
+          name: "companies",
+          axisYType: "secondary",
+          color: "#157159",
+          dataPoints: [
+
+          {%for items in data['Items_Required'].keys()%}
+            { y: {{data['Items_Required'][items]}}, label: "{{items}}" },
+            
+            {% endfor %}
+          ]
+        }]
+      });
+      chart.render();
+      
+      }
+    </script>
+  </head>
+  <body>
+    <div id="header">
+    	<br>
+      <h2>For My Kerala - Statistics</h2>
+      <br>
+      Completed Requests: {{data['Number_Of_Completed_Requests']}}
+      <br>
+        <br>
+        Verified Requests: {{data['Number_Of_Verified_Requests']}}
+        <br>
+        <br>
+        <br>
+    </div>
+ 
+      <div class="container">
+          <table class="highlight">
+              <thead>
+                <tr>
+                  <th><b>Items Required</b></th>
+                    <th><b>Quantity Required</b></th>
+                    
+                   
+                </tr>
+              </thead>
+      
+              <tbody>
+                
+                {%for items in data['Items_Required'].keys()%}
+                  
+                  
+                <tr>
+                  
+                  <td>{{items}}</td>
+                  <td>{{data['Items_Required'][items]}}</td>
+                  
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+      </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+          <script src="../static/assets1/js/chart.js"></script><br><br><br>
+        </div>
+        <br>
+        <br>
+    
+  </body>
+</html>

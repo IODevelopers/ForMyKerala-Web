@@ -914,6 +914,18 @@ def donation_dashboard():
 
     return render_template("active_donations.html",donors=donors)
 
+@app.route('/statistics', methods=['GET','POST']) 
+def stats():
+
+    # Getting all stats
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/admin/stats"
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, headers=headers)
+    donors = r.json()
+    print(donors)
+
+    return render_template("statistics.html",data=donors)
+
 @app.context_processor
 def date_processor():
     def change_epoch(epoch):
