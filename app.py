@@ -429,7 +429,7 @@ def volunteer_request():
         r=requests.post(url, data=json.dumps(data), headers=headers)
         data = r.json()
         
-        message = "Request successfully added"
+        message = data['Message']
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
         headers = {'content-type': 'application/json'}
         r=requests.get(url, headers=headers)
@@ -794,7 +794,7 @@ def requesthelp():
         r=requests.post(url, data=json.dumps(data), headers=headers)
         data = r.json()
         
-        message = "Successfully Registered"
+        message = data['Message']
         url = 'https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/requests/get-items'
         headers = {'content-type': 'application/json'}
         r=requests.get(url, headers=headers)
