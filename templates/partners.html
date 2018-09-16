@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>For My Kerala</title>
+    <link href="../static/css/newindex.css?v=1.0" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../static/form/images/icons/favicon.ico"/>
+    <script>   
+    	function alerter() {
+                    alert("Download the app to Donate");
+                    window.location="https://formykerala.in/#download";
+                }
+      function viewmore(LastEvaluatedKey){
+        window.location="/loadmorerequests/"+LastEvaluatedKey;
+
+      }
+
+	</script>
+  </head>
+  <body>
+    <div id="header">
+    	<br>
+      <h2>NGO Partners</h2>
+     
+     
+    </div>
+    <br>
+    <br>
+    <br>
+    <div id="listing">
+      <div id="sorter">
+	<span class="request"><span class="count">{{donors['Count']}}</span> Partners </span>
+	
+      </div>
+      {%for i in range(0,donors['Count'])%}
+      <div class="card">
+	<div  class="location-and-number">
+	  <div class="location">
+	    <p class="label">Partner</p>
+	    <p class="value">{{donors['Items'][i]['Name']}} </p>
+	  </div>
+	  <div class="phone-number">
+	    <p class="label">Contact No.</p>
+	    <p style="color:black;" class="value">{{donors['Items'][i]['ContactNumber']}}</p>
+	    
+	  </div>
+	
+	  <div class="phone-number district" > 
+	    <p class="label">District</p>
+	    <p  class="value"><a  style="text-decoration: none; color:#157159;">{{donors['Items'][i]['District']}}</a> 
+    </p>
+	  </div>
+	</div>
+	<div class="quantity-and-notes">
+    <p class="label">Address: {{donors['Items'][i]['Address']}}   </p>
+    
+    <p class="label">Email: &nbsp; {{donors['Items'][i]['Families']}}  </p>
+    
+    
+	 
+	</div>
+	
+      </div>
+      {% endfor %}
+      <br>
+      
+     
+      <br>
+      <br>
+    </div>
+  </body>
+</html>

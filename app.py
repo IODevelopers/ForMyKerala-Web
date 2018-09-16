@@ -9,8 +9,8 @@ from flask import Flask ,render_template, redirect, url_for, session, request, l
 
 
 app = Flask(__name__)
-from flask_sslify import SSLify
-sslify = SSLify(app)
+#from flask_sslify import SSLify
+#sslify = SSLify(app)
 def is_logged_in(f):	# Function for implementing security and redirection
 	@wraps(f)
 	def wrap(*args,**kwargs):
@@ -892,6 +892,26 @@ def loadmorerequestsfulfilled(timeindex):
     print(data)
 
     return render_template("fulfilledrequests.html",data=data)
+
+@app.route('/partners/<string:partner>', methods=['GET','POST']) 
+def partners(partner):
+
+    # Getting all verified and closed requests more
+    data = {"Partner": partner }
+    url ="https://e7i3xdj8he.execute-api.ap-south-1.amazonaws.com/Dev/ngo/get"
+    headers = {'content-type': 'application/json'}
+    r=requests.post(url, data=json.dumps(data),headers=headers)
+    data = r.json()
+    print(data)
+    print(partner)
+
+    return render_template("partners.html",donors=data)
+
+
+
+
+
+
 
 @app.route('/loadmorerequestsvolunteer/<string:timeindex>', methods=['GET','POST']) 
 def loadmorerequestsvolunteer(timeindex):
