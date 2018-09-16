@@ -10,7 +10,7 @@ from flask import Flask ,render_template, redirect, url_for, session, request, l
 
 app = Flask(__name__)
 from flask_sslify import SSLify
-#sslify = SSLify(app)
+sslify = SSLify(app)
 def is_logged_in(f):	# Function for implementing security and redirection
 	@wraps(f)
 	def wrap(*args,**kwargs):
@@ -672,6 +672,8 @@ def edit_stock():
     headers = {'content-type': 'application/json'}
     r=requests.post(url, headers=headers)
     data = r.json()
+    from sortedcontainers import SortedDict
+    data['Items'] = SortedDict(data['Items'])
     count = len(list(data['Items'].keys()))
     print(count)
     return render_template("stock.html",data=data,count=count)
@@ -685,6 +687,8 @@ def stock():
     r=requests.post(url, headers=headers)
     data = r.json()
     count = len(list(data['Items'].keys()))
+    from sortedcontainers import SortedDict
+    data['Items'] = SortedDict(data['Items'])
     print(count)
     return render_template("stock1.html",data=data,count=count)
 
