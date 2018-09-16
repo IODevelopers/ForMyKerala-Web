@@ -53,12 +53,22 @@
 	</div>
 	<div class="quantity-and-notes">
     <p class="label">Address: {{donors['Items'][i]['Address']}}   </p>
-    
+    <br><br>
     <p class="label">Email: &nbsp; {{donors['Items'][i]['Families']}}  </p>
     
     
 	 
-	</div>
+  </div>
+  
+  <div class="notes">
+
+    <p class="label">Person to Contact</p>
+    <p  class="value"><a  style="text-decoration: none; color:#157159;">{{donors['Items'][i]['ContactPerson']}}</a> 
+  </p>
+  <br>
+    
+
+  </div>
 	
       </div>
       {% endfor %}
